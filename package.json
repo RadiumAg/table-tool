@@ -11,5 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "typescript": "^4.8.4"
+  },
+  "devDependencies": {
+    "@raag/eslint-config-vue": "^1.1.4"
   }
 }
