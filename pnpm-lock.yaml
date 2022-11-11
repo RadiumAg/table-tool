@@ -6,15 +6,19 @@ importers:
     specifiers:
       '@raag/eslint-config-react': ^1.1.4
       '@raag/eslint-config-vue': ^1.1.4
+      '@vue/compiler-sfc': ^3.2.45
+      edit-cell-vue: workspace:*
       eslint: ^8.27.0
       typescript: ^4.8.4
       vue: ^3.2.44
     dependencies:
+      '@vue/compiler-sfc': 3.2.45
       typescript: 4.8.4
       vue: 3.2.44
     devDependencies:
       '@raag/eslint-config-react': 1.1.4_rmayb2veg2btbq6mbmnyivgasy
       '@raag/eslint-config-vue': 1.1.4_rmayb2veg2btbq6mbmnyivgasy
+      edit-cell-vue: link:packages/vue
       eslint: 8.27.0
 
   packages/react:
@@ -25,7 +29,12 @@ importers:
 
   packages/vue:
     specifiers:
+      '@vue/compiler-sfc': ^3.2.45
       typescript: ^4.8.4
+      vue: ^3.2.44
+    dependencies:
+      '@vue/compiler-sfc': 3.2.45
+      vue: 3.2.44
     devDependencies:
       typescript: 4.8.4
 
@@ -381,11 +390,27 @@ packages:
       source-map: 0.6.1
     dev: false
 
+  /@vue/compiler-core/3.2.45:
+    resolution: {integrity: sha512-rcMj7H+PYe5wBV3iYeUgbCglC+pbpN8hBLTJvRiK2eKQiWqu+fG9F+8sW99JdL4LQi7Re178UOxn09puSXvn4A==}
+    dependencies:
+      '@babel/parser': 7.20.3
+      '@vue/shared': 3.2.45
+      estree-walker: 2.0.2
+      source-map: 0.6.1
+    dev: false
+
   /@vue/compiler-dom/3.2.44:
     resolution: {integrity: sha512-wPDR+gOn2Qi7SudPJ+gE62vuO/aKXIiIFALvHpztXmDdbAHGy3CDfmBgOGchTgTlSeDJHe9olEMkgOdmyXTjUg==}
     dependencies:
       '@vue/compiler-core': 3.2.44
       '@vue/shared': 3.2.44
+    dev: false
+
+  /@vue/compiler-dom/3.2.45:
+    resolution: {integrity: sha512-tyYeUEuKqqZO137WrZkpwfPCdiiIeXYCcJ8L4gWz9vqaxzIQRccTSwSWZ/Axx5YR2z+LvpUbmPNXxuBU45lyRw==}
+    dependencies:
+      '@vue/compiler-core': 3.2.45
+      '@vue/shared': 3.2.45
     dev: false
 
   /@vue/compiler-sfc/3.2.44:
@@ -403,11 +428,33 @@ packages:
       source-map: 0.6.1
     dev: false
 
+  /@vue/compiler-sfc/3.2.45:
+    resolution: {integrity: sha512-1jXDuWah1ggsnSAOGsec8cFjT/K6TMZ0sPL3o3d84Ft2AYZi2jWJgRMjw4iaK0rBfA89L5gw427H4n1RZQBu6Q==}
+    dependencies:
+      '@babel/parser': 7.20.3
+      '@vue/compiler-core': 3.2.45
+      '@vue/compiler-dom': 3.2.45
+      '@vue/compiler-ssr': 3.2.45
+      '@vue/reactivity-transform': 3.2.45
+      '@vue/shared': 3.2.45
+      estree-walker: 2.0.2
+      magic-string: 0.25.9
+      postcss: 8.4.18
+      source-map: 0.6.1
+    dev: false
+
   /@vue/compiler-ssr/3.2.44:
     resolution: {integrity: sha512-tAkUFLgvxds3l5KPyAH77OIYrEeLngNYQfWA9GocHiy2nlyajjqAH/Jq93Bq29Y20GeJzblmRp9DVYCVkJ5Rsw==}
     dependencies:
       '@vue/compiler-dom': 3.2.44
       '@vue/shared': 3.2.44
+    dev: false
+
+  /@vue/compiler-ssr/3.2.45:
+    resolution: {integrity: sha512-6BRaggEGqhWht3lt24CrIbQSRD5O07MTmd+LjAn5fJj568+R9eUD2F7wMQJjX859seSlrYog7sUtrZSd7feqrQ==}
+    dependencies:
+      '@vue/compiler-dom': 3.2.45
+      '@vue/shared': 3.2.45
     dev: false
 
   /@vue/reactivity-transform/3.2.44:
@@ -416,6 +463,16 @@ packages:
       '@babel/parser': 7.20.3
       '@vue/compiler-core': 3.2.44
       '@vue/shared': 3.2.44
+      estree-walker: 2.0.2
+      magic-string: 0.25.9
+    dev: false
+
+  /@vue/reactivity-transform/3.2.45:
+    resolution: {integrity: sha512-BHVmzYAvM7vcU5WmuYqXpwaBHjsS8T63jlKGWVtHxAHIoMIlmaMyurUSEs1Zcg46M4AYT5MtB1U274/2aNzjJQ==}
+    dependencies:
+      '@babel/parser': 7.20.3
+      '@vue/compiler-core': 3.2.45
+      '@vue/shared': 3.2.45
       estree-walker: 2.0.2
       magic-string: 0.25.9
     dev: false
@@ -453,6 +510,10 @@ packages:
 
   /@vue/shared/3.2.44:
     resolution: {integrity: sha512-mGZ44bnn0zpZ36nXtxbrBPno43yr96wjQE1dBEKS1Sieugt27HS4OGZVBRIgsdGzosB7vqZAvu0ttu1FDVdolA==}
+    dev: false
+
+  /@vue/shared/3.2.45:
+    resolution: {integrity: sha512-Ewzq5Yhimg7pSztDV+RH1UDKBzmtqieXQlpTVm2AwraoRL/Rks96mvd8Vgi7Lj+h+TH8dv7mXD3FRZR3TUvbSg==}
     dev: false
 
   /acorn-jsx/5.3.2_acorn@8.8.1:
