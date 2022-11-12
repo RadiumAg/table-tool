@@ -17,7 +17,7 @@
     "typescript": "^4.8.4"
   },
   "dependencies": {
-    "@edit-cell/react": "workspace:1.0.0",
-    "@edit-cell/vue": "workspace:1.0.0"
+    "@edit-cell/react": "workspace:*",
+    "@edit-cell/vue": "workspace:*"
   }
 }

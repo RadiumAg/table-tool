@@ -14,5 +14,13 @@
   "devDependencies": {
     "vitepress": "1.0.0-alpha.28",
     "vue": "^3.2.44"
+  },
+  "dependencies": {
+    "@algolia/client-search": ">= 4.9.1 < 6",
+    "@edit-cell/react": "workspace:*",
+    "@edit-cell/vue": "workspace:*",
+    "@types/mockjs": "^1.0.7",
+    "element-plus": "^2.2.21",
+    "mockjs": "^1.1.0"
   }
 }
