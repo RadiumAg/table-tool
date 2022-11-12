@@ -1,5 +1,5 @@
 {
-  "name": "edit-cell-vue",
+  "name": "@edit-cell/react",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,9 +10,15 @@
   "author": "",
   "license": "ISC",
   "peerDependencies": {
-    "react": ">=18.0.0"
+    "react": "^18.0.0",
+    "react-dom": "^18.2.0"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "typescript": "^4.8.4"
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.8"
   }
 }

@@ -3,3 +3,5 @@ export const editCellProps = {
     type: [Number, String],
   },
 };
+
+export const editCellEmits = ['update:modelValue'];

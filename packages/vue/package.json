@@ -1,5 +1,5 @@
 {
-  "name": "edit-cell-vue",
+  "name": "@edit-cell/vue",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,11 +10,7 @@
   "peerDependencies": {
     "vue": "^3.0.0"
   },
-  "devDependencies": {
-    "typescript": "^4.8.4"
-  },
   "dependencies": {
-    "@vue/compiler-sfc": "^3.2.45",
     "vue": "^3.2.44"
   }
 }
