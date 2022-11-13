@@ -1,0 +1,8 @@
+/** @format */
+.edit-cell {
+  width: 100%;
+  height: 100%;
+  will-change: width;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

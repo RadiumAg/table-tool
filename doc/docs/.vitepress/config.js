@@ -1,6 +1,14 @@
 export default {
-  // These are app level configs.
-  lang: 'en-US',
-  title: 'edit-cell',
-  description: 'Vite & Vue powered static site generator.',
+  lang: 'zh-cn',
+  title: 'TableTool',
+  description: '强化表格,让表格更容易使用',
+  themeConfig: {
+    nav: [],
+    sidebar: [
+      {
+        text: '基本使用',
+        items: [{ text: '表格编辑', link: '/edit-cell' }],
+      },
+    ],
+  },
 };

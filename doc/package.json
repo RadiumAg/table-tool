@@ -12,13 +12,17 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@vitejs/plugin-vue": "^3.2.0",
+    "@vitejs/plugin-vue-jsx": "^2.1.1",
+    "sass": "^1.56.1",
+    "vite": "^3.2.3",
     "vitepress": "1.0.0-alpha.28",
     "vue": "^3.2.44"
   },
   "dependencies": {
     "@algolia/client-search": ">= 4.9.1 < 6",
-    "@edit-cell/react": "workspace:*",
-    "@edit-cell/vue": "workspace:*",
+    "@table-tool/react": "workspace:*",
+    "@table-tool/vue": "workspace:*",
     "@types/mockjs": "^1.0.7",
     "element-plus": "^2.2.21",
     "mockjs": "^1.1.0"

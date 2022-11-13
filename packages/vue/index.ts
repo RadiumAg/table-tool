@@ -1,1 +1,1 @@
-export * as EditCell from './src/edit-cell';
+export { default as EditCell } from './src/cell';
