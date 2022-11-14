@@ -1,12 +1,3 @@
-<script setup>
-import EditCell from '../src/demo/vue/edit-cell.vue'
-</script>
-
-
-### 基本使用
-<EditCell/>
-
-```typescript
 <template>
   <el-table border height="400" :data="tableData">
     <el-table-column type="index" label="序号" width="60px"></el-table-column>
@@ -76,8 +67,5 @@ import { UserList, useData } from '../../utils/data';
 
 const tableData = ref<UserList>([]);
 
-useData(500, tableData);
+useData(100, tableData);
 </script>
-```
-
-### 编辑时默认选中

@@ -1,5 +1,5 @@
 import mockJs from 'mockjs';
-import { Ref } from 'vue';
+import { Ref, nextTick } from 'vue';
 
 export type UserList = {
   age: number;
@@ -25,8 +25,18 @@ const genatorData = (number: number) => {
   }));
 };
 
-export const useData = (length: number, dataRef: Ref<any[]>) => {
+export const useData = async (
+  length: number,
+  dataRef: Ref<any[]>,
+  loading?: Ref<boolean>,
+) => {
+  if (loading && !loading.value) {
+    loading.value = true;
+    await nextTick();
+  }
   if (length <= 200) {
+    console.log(loading?.value);
+    if (loading && loading.value) loading.value = false;
     dataRef.value = dataRef.value.concat(genatorData(length));
   } else {
     const sign = setTimeout(() => {

@@ -1,5 +1,5 @@
 <template>
-  <el-table border height="400" :data="tableData">
+  <el-table v-loading="isLoading" border height="400" :data="tableData">
     <el-table-column type="index" label="序号" width="60px"></el-table-column>
 
     <el-table-column
@@ -60,12 +60,13 @@
 <script lang="ts" setup>
 import 'element-plus/theme-chalk/dark/css-vars.css';
 import 'element-plus/theme-chalk/index.css';
-import { EditCell } from '@table-tool/vue';
-import { ElInput, ElTable, ElTableColumn } from 'element-plus';
+import { Cell as EditCell } from '@table-tool/vue';
+import { ElInput, ElTable, ElTableColumn, vLoading } from 'element-plus';
 import { ref } from 'vue';
 import { UserList, useData } from '../../utils/data';
 
 const tableData = ref<UserList>([]);
+const isLoading = ref(false);
 
-useData(10, tableData);
+useData(300, tableData, isLoading);
 </script>
