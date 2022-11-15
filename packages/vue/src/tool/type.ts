@@ -1,10 +1,9 @@
 import { Ref } from 'vue';
-import { object } from 'yup';
 import { Cell, ValidateRule } from './../cell/type';
 
 export type RootSchema = {
   field: string;
-  schemas: ReturnType<typeof object>[];
+  schemas: any[];
 }[];
 
 export type TableToolProvide = {

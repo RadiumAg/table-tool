@@ -1,4 +1,4 @@
-import { PropType } from 'vue';
+import { PropType, ref } from 'vue';
 import { ValidateRule } from './type';
 
 export const editCellProps = {
@@ -21,3 +21,10 @@ export const editCellProps = {
 };
 
 export const editCellEmits = ['update:modelValue'];
+
+export const activeCell = ref<HTMLDivElement | null>();
+
+export const otherAreaClick = () => {
+  if (!activeCell.value) return;
+  activeCell.value = null;
+};

@@ -65,19 +65,6 @@ import EditCell from '../src/demo/vue/edit-cell.vue'
     </el-table-column>
   </el-table>
 </template>
-
-<script lang="ts" setup>
-import 'element-plus/theme-chalk/dark/css-vars.css';
-import 'element-plus/theme-chalk/index.css';
-import { Cell as EditCell } from '@table-tool/vue';
-import { ElInput, ElTable, ElTableColumn } from 'element-plus';
-import { ref } from 'vue';
-import { UserList, useData } from '../../utils/data';
-
-const tableData = ref<UserList>([]);
-
-useData(500, tableData);
-</script>
 ```
 
 ### 编辑时默认选中

@@ -1,6 +1,8 @@
 /** @format */
 .edit-cell {
   width: 100%;
+  min-width: 50px;
+  min-height: 20px;
   height: 100%;
   will-change: width;
   overflow: hidden;

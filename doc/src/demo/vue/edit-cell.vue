@@ -67,6 +67,5 @@ import { UserList, useData } from '../../utils/data';
 
 const tableData = ref<UserList>([]);
 const isLoading = ref(false);
-
-useData(300, tableData, isLoading);
+useData(100, tableData, isLoading);
 </script>

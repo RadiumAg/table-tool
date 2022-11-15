@@ -9,7 +9,11 @@
       show-overflow-tooltip
     >
       <template #default="{ row }">
-        <edit-cell :model-value="row.name" field="name">
+        <edit-cell
+          :model-value="row.name"
+          field="name"
+          :edit-rules="[{ required: true, message: '必填' }]"
+        >
           <el-input v-model="row.name"></el-input>
         </edit-cell>
       </template>

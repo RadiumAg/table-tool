@@ -1,4 +1,5 @@
 import {
+  Teleport,
   computed,
   defineComponent,
   inject,
@@ -7,14 +8,18 @@ import {
   ref,
   watch,
 } from 'vue';
-import * as yup from 'yup';
+import { ValidationError } from 'yup';
+import ErrorMessage from '../error-message';
 import { TABLE_TOOL_PROVIDE_KEY } from '../tool/tool';
-import { TableToolProvide } from '../tool/type';
+import { RootSchema, TableToolProvide } from '../tool/type';
 import { getSchema } from '../utils/yup';
-import { editCellEmits, editCellProps } from './cell';
+import {
+  activeCell,
+  editCellEmits,
+  editCellProps,
+  otherAreaClick,
+} from './cell';
 import Style from './index.module.scss';
-
-const activeCell = ref<HTMLDivElement | null>();
 
 export default defineComponent({
   props: editCellProps,
@@ -25,10 +30,17 @@ export default defineComponent({
       TABLE_TOOL_PROVIDE_KEY,
       {
         cellArray: ref([]),
-        rootSchema: ref(yup.object()) as any,
+        rootSchema: ref([]),
       },
     );
+    const errorMessage = ref('');
     const containerRef = ref<HTMLDivElement>();
+    const clientReact = computed(() => {
+      if (!containerRef.value) return [0, 0];
+      const computedStyle = containerRef.value.getBoundingClientRect();
+      return [computedStyle.left, computedStyle.top];
+    });
+    const schema: RootSchema[number] = { field: '', schemas: [] };
 
     const isFocus = computed(() => {
       return activeCell.value === containerRef.value;
@@ -72,13 +84,24 @@ export default defineComponent({
       autoselectElement.select();
     };
 
-    const validate = () => {};
+    const validate = async () => {
+      errorMessage.value = '';
+      for (const filedSchema of schema.schemas) {
+        try {
+          await filedSchema.validate(props.modelValue);
+        } catch (e) {
+          if (e instanceof ValidationError) {
+            errorMessage.value = e.message;
+          }
+          activeCell.value = containerRef.value;
+          break;
+        }
+      }
+    };
 
     onMounted(() => {
-      document.addEventListener('click', () => {
-        if (!activeCell.value) return;
-        activeCell.value = null;
-      });
+      document.removeEventListener('mousedown', otherAreaClick);
+      document.addEventListener('mousedown', otherAreaClick);
     });
 
     watch(isFocus, () => {
@@ -98,10 +121,19 @@ export default defineComponent({
           console.warn('请设置filed');
           return;
         }
-        rootSchema.value.push(getSchema(props.field, props.editRules));
+        const { field, schemas } = getSchema(props.field, props.editRules);
+        schema.schemas = schemas;
+        schema.field = field;
+        rootSchema.value.push(schema);
       },
       { immediate: true },
     );
+
+    watch(isFocus, () => {
+      if (!isFocus.value) {
+        validate();
+      }
+    });
 
     cellArray.value.push({
       validate,
@@ -112,12 +144,22 @@ export default defineComponent({
         <div
           class={Style.editCell}
           ref={containerRef}
-          onClick={event => {
+          onMousedown={event => {
             event.stopPropagation();
             activeCell.value = containerRef.value;
           }}
         >
           {content.value}
+
+          <Teleport to="body">
+            <ErrorMessage
+              message={errorMessage.value}
+              offset={{
+                left: clientReact.value[0],
+                top: clientReact.value[1],
+              }}
+            />
+          </Teleport>
         </div>
       );
     };
