@@ -4,7 +4,7 @@ import {
   getCurrentInstance,
   ref,
 } from 'vue';
-import { ValidateRule } from './type';
+import { CellInstance, ValidateRule } from './type';
 
 export const editCellProps = {
   row: {
@@ -28,7 +28,7 @@ export const editCellProps = {
 
 export const editCellEmits = ['update:modelValue'];
 
-export const editCell = ref<ComponentInternalInstance | null>();
+export const editCell = ref<CellInstance | null>();
 
 export const activeCell = ref<HTMLDivElement | null>();
 
