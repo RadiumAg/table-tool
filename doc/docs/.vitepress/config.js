@@ -7,7 +7,10 @@ export default {
     sidebar: [
       {
         text: '基本使用',
-        items: [{ text: '表格编辑', link: '/edit-cell' }],
+        items: [
+          { text: '表格编辑', link: '/edit-cell' },
+          { text: '表格验证', link: '/validate' },
+        ],
       },
     ],
   },

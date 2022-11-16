@@ -1,0 +1,12 @@
+/** @format */
+.message-box {
+  color: #fff;
+  z-index: 9999;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 12px;
+  border-radius: 4px;
+  background-color: #f56c6c;
+}

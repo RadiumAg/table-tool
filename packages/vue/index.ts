@@ -1,1 +1,1 @@
-export { default as EditCell } from './src/cell';
+export * from './src';

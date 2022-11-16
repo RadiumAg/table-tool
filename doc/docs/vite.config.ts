@@ -12,4 +12,7 @@ export default defineConfig({
       localsConvention: 'camelCase',
     },
   },
+  server: {
+    port: 5174,
+  },
 });
