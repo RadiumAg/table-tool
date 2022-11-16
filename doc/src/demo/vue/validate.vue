@@ -12,7 +12,7 @@
         <edit-cell
           :model-value="row.name"
           field="name"
-          :edit-rules="[{ required: true, message: '必填' }]"
+          :edit-rules="[{ required: true, message: '名称必填' }]"
         >
           <el-input v-model="row.name"></el-input>
         </edit-cell>

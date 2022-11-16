@@ -7,17 +7,7 @@ export default defineComponent({
   setup(props) {
     return () => {
       return (
-        props.message && (
-          <div
-            class={Style.messageBox}
-            style={{
-              left: `${props.offset?.left}px`,
-              top: `${props.offset?.top! + 50}px`,
-            }}
-          >
-            {props.message}
-          </div>
-        )
+        props.message && <div class={Style.messageBox}>{props.message}</div>
       );
     };
   },

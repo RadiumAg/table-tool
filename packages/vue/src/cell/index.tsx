@@ -33,17 +33,27 @@ export default defineComponent({
         rootSchema: ref([]),
       },
     );
+    const tdElement = ref<HTMLTableCellElement>();
     const errorMessage = ref('');
     const containerRef = ref<HTMLDivElement>();
-    const clientReact = computed(() => {
-      if (!containerRef.value) return [0, 0];
-      const computedStyle = containerRef.value.getBoundingClientRect();
-      return [computedStyle.left, computedStyle.top];
-    });
     const schema: RootSchema[number] = { field: '', schemas: [] };
 
     const isFocus = computed(() => {
       return activeCell.value === containerRef.value;
+    });
+
+    const containerReact = computed(() => {
+      if (!tdElement.value) {
+        return {
+          width: 0,
+          height: 0,
+        };
+      }
+      const { width, height } = tdElement.value.getBoundingClientRect();
+      return {
+        width,
+        height,
+      };
     });
 
     const content = computed(() => {
@@ -86,6 +96,7 @@ export default defineComponent({
 
     const validate = async () => {
       errorMessage.value = '';
+      if (tdElement.value) tdElement.value.style.zIndex = 'unset';
       for (const filedSchema of schema.schemas) {
         try {
           await filedSchema.validate(props.modelValue);
@@ -93,15 +104,36 @@ export default defineComponent({
           if (e instanceof ValidationError) {
             errorMessage.value = e.message;
           }
-          activeCell.value = containerRef.value;
+          if (tdElement.value) tdElement.value.style.zIndex = '999';
           break;
         }
+      }
+    };
+
+    const setTdStyle = () => {
+      const findElement = (
+        element: HTMLElement,
+      ): HTMLTableCellElement | undefined => {
+        if (element instanceof HTMLTableCellElement) {
+          return element;
+        } else if (element.parentElement) {
+          return findElement(element.parentElement);
+        } else {
+          return;
+        }
+      };
+
+      if (containerRef.value) {
+        tdElement.value = findElement(containerRef.value);
+        if (tdElement.value) tdElement.value.style.position = 'relative';
       }
     };
 
     onMounted(() => {
       document.removeEventListener('mousedown', otherAreaClick);
       document.addEventListener('mousedown', otherAreaClick);
+
+      setTdStyle();
     });
 
     watch(isFocus, () => {
@@ -143,6 +175,10 @@ export default defineComponent({
       return (
         <div
           class={Style.editCell}
+          style={{
+            width: `${containerReact.value.width}px`,
+            height: `${containerReact.value.height}px`,
+          }}
           ref={containerRef}
           onMousedown={event => {
             event.stopPropagation();
@@ -151,15 +187,11 @@ export default defineComponent({
         >
           {content.value}
 
-          <Teleport to="body">
-            <ErrorMessage
-              message={errorMessage.value}
-              offset={{
-                left: clientReact.value[0],
-                top: clientReact.value[1],
-              }}
-            />
-          </Teleport>
+          {tdElement.value && (
+            <Teleport to={tdElement.value}>
+              <ErrorMessage message={errorMessage.value} />
+            </Teleport>
+          )}
         </div>
       );
     };
