@@ -19,5 +19,5 @@ jobs:
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         BRANCH: main
-        FOLDER: doc/docs/vitepress/dist
-        BUILD_SCRIPT: npm i pnpm -g && npm install &&  npm run -C doc docs:build
+        FOLDER: /doc/docs/vitepress/dist
+        BUILD_SCRIPT: npm i pnpm -g && pnpm install &&  pnpm run -C doc docs:build
