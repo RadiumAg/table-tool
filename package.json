@@ -2,6 +2,7 @@
   "name": "table-tool",
   "version": "1.0.0",
   "description": "",
+  "homepage":  "https://[username].github.io/tool-box",
   "main": "index.js",
   "scripts": {
     "clear-node_module": "rimraf node_modules"

@@ -1,6 +1,5 @@
 {
   "name": "doc",
-  "homepage":  "https://[username].github.io/tool-box",
   "version": "1.0.0",
   "description": "tool box's doc",
   "main": "index.js",
