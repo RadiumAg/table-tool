@@ -1,6 +1,10 @@
 name: TableTool publish
 on:
-  push:
+  pull_request:
+    types:
+      - "opened"
+      - "reopened"
+      - "auto_merge_enabled"
     branches:
       - master
 jobs:
