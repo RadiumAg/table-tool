@@ -1,9 +1,14 @@
-import { PropType, ref } from 'vue';
+import {
+  ComponentInternalInstance,
+  PropType,
+  getCurrentInstance,
+  ref,
+} from 'vue';
 import { ValidateRule } from './type';
 
 export const editCellProps = {
-  modelValue: {
-    type: [Number, String],
+  row: {
+    type: Object,
     required: true,
   },
   editRender: {
@@ -17,10 +22,13 @@ export const editCellProps = {
   },
   field: {
     type: String,
+    required: true,
   },
 };
 
 export const editCellEmits = ['update:modelValue'];
+
+export const editCell = ref<ComponentInternalInstance | null>();
 
 export const activeCell = ref<HTMLDivElement | null>();
 

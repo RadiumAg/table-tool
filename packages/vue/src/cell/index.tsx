@@ -2,6 +2,7 @@ import {
   Teleport,
   computed,
   defineComponent,
+  getCurrentInstance,
   inject,
   nextTick,
   onMounted,
@@ -15,6 +16,7 @@ import { RootSchema, TableToolProvide } from '../tool/type';
 import { getSchema } from '../utils/yup';
 import {
   activeCell,
+  editCell,
   editCellEmits,
   editCellProps,
   otherAreaClick,
@@ -25,7 +27,7 @@ export default defineComponent({
   props: editCellProps,
   emits: editCellEmits,
 
-  setup(props, { slots }) {
+  setup(props, { slots, expose }) {
     const { cellArray, rootSchema } = inject<TableToolProvide>(
       TABLE_TOOL_PROVIDE_KEY,
       {
@@ -33,6 +35,11 @@ export default defineComponent({
         rootSchema: ref([]),
       },
     );
+    const cellValue = computed(() => {
+      if (!props.field || !props.row) return;
+      return props.row[props.field];
+    });
+    const currentInstance = getCurrentInstance();
     const tdElement = ref<HTMLTableCellElement>();
     const errorMessage = ref('');
     const containerRef = ref<HTMLDivElement>();
@@ -42,29 +49,21 @@ export default defineComponent({
       return activeCell.value === containerRef.value;
     });
 
-    const containerReact = computed(() => {
-      if (!tdElement.value) {
-        return {
-          width: 0,
-          height: 0,
-        };
-      }
-      const { width, height } = tdElement.value.getBoundingClientRect();
-      return {
-        width,
-        height,
-      };
-    });
-
     const content = computed(() => {
       if (isFocus.value) {
         if (slots.default) {
           return slots.default();
         } else return null;
       } else {
-        return props.modelValue;
+        return cellValue.value;
       }
     });
+
+    const setFocus = () => {
+      if (activeCell.value === containerRef.value) return;
+
+      activeCell.value = containerRef.value;
+    };
 
     const setAutofocus = async () => {
       await nextTick();
@@ -99,7 +98,7 @@ export default defineComponent({
       if (tdElement.value) tdElement.value.style.zIndex = 'unset';
       for (const filedSchema of schema.schemas) {
         try {
-          await filedSchema.validate(props.modelValue);
+          await filedSchema.validate(cellValue.value);
         } catch (e) {
           if (e instanceof ValidationError) {
             errorMessage.value = e.message;
@@ -167,7 +166,18 @@ export default defineComponent({
       }
     });
 
+    watch(cellValue, () => {
+      if (!isFocus.value) {
+        validate();
+      }
+    });
+
     cellArray.value.push({
+      validate,
+    });
+
+    expose({
+      focus: setFocus,
       validate,
     });
 
@@ -175,23 +185,21 @@ export default defineComponent({
       return (
         <div
           class={Style.editCell}
-          style={{
-            width: `${containerReact.value.width}px`,
-            height: `${containerReact.value.height}px`,
-          }}
           ref={containerRef}
           onMousedown={event => {
             event.stopPropagation();
-            activeCell.value = containerRef.value;
+            editCell.value = currentInstance;
+            setFocus();
           }}
         >
           {content.value}
-
-          {tdElement.value && (
+          {tdElement.value && isFocus.value && (
             <Teleport to={tdElement.value}>
               <ErrorMessage message={errorMessage.value} />
             </Teleport>
           )}
+
+          {!isFocus.value && <div class={Style.mask}></div>}
         </div>
       );
     };

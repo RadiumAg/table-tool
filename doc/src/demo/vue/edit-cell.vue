@@ -9,7 +9,7 @@
       show-overflow-tooltip
     >
       <template #default="{ row }">
-        <edit-cell :model-value="row.name">
+        <edit-cell :row="row" field="name">
           <el-input v-model="row.name"></el-input>
         </edit-cell>
       </template>
@@ -17,7 +17,7 @@
 
     <el-table-column prop="phone" label="联系方式" width="100">
       <template #default="{ row }">
-        <edit-cell :model-value="row.phone">
+        <edit-cell :row="row" field="name">
           <el-input v-model="row.phone"></el-input>
         </edit-cell>
       </template>
@@ -25,7 +25,7 @@
 
     <el-table-column prop="favorite" label="爱好">
       <template #default="{ row }">
-        <edit-cell :model-value="row.favorite">
+        <edit-cell :row="row" field="name">
           <el-input v-model="row.favorite"></el-input>
         </edit-cell>
       </template>
@@ -33,7 +33,7 @@
 
     <el-table-column prop="job" label="职业">
       <template #default="{ row }">
-        <edit-cell :model-value="row.job">
+        <edit-cell :row="row" field="name">
           <el-input v-model="row.job"></el-input>
         </edit-cell>
       </template>
@@ -41,7 +41,7 @@
 
     <el-table-column prop="age" label="年龄">
       <template #default="{ row }">
-        <edit-cell :model-value="row.age">
+        <edit-cell :row="row" field="name">
           <el-input v-model="row.age"></el-input>
         </edit-cell>
       </template>
@@ -49,7 +49,7 @@
 
     <el-table-column prop="address" label="地址">
       <template #default="{ row }">
-        <edit-cell :model-value="row.address">
+        <edit-cell :row="row" field="name">
           <el-input v-model="row.address"></el-input>
         </edit-cell>
       </template>
