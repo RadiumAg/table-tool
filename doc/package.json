@@ -1,7 +1,7 @@
 {
   "name": "doc",
   "version": "1.0.0",
-  "description": "",
+  "description": "tool box's doc",
   "main": "index.js",
   "scripts": {
     "docs:dev": "vitepress dev docs",
