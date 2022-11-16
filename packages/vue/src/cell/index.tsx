@@ -94,17 +94,20 @@ export default defineComponent({
     };
 
     const validate = async () => {
+      if (schema.schemas.length === 0) return true;
+
       errorMessage.value = '';
-      if (tdElement.value) tdElement.value.style.zIndex = 'unset';
+      if (tdElement.value) tdElement.value.style.zIndex = '';
       for (const filedSchema of schema.schemas) {
         try {
           await filedSchema.validate(cellValue.value);
+          return true;
         } catch (e) {
           if (e instanceof ValidationError) {
             errorMessage.value = e.message;
           }
           if (tdElement.value) tdElement.value.style.zIndex = '999';
-          break;
+          return false;
         }
       }
     };

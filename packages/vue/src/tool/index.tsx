@@ -11,10 +11,11 @@ export default defineComponent({
     const cellArray = ref<Cell[]>([]);
     const rootSchema = ref<RootSchema>([]);
 
-    const cellValidate = () => {
+    const cellValidate = async () => {
       if (!editCell.value?.exposed) return;
-      editCell.value.exposed.focus();
-      editCell.value.exposed.validate();
+      if (!(await editCell.value.exposed.validate())) {
+        editCell.value.exposed.focus();
+      }
     };
 
     const validate = () => {
