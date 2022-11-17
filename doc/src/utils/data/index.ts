@@ -42,13 +42,11 @@ export const useData = async (
 
     if (count < length) {
       const sign = setTimeout(() => {
-        const start = performance.now();
         genatorData();
         clearTimeout(sign);
         // eslint-disable-next-line no-console
         console.log(dataRef.value.length);
         // eslint-disable-next-line no-console
-        console.log('during', `${performance.now() - start}`);
       }, 600);
     } else if (count === length && loading) loading.value = false;
   };
