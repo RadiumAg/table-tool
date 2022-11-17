@@ -1,7 +1,11 @@
 name: Deploy
 
 on:
-  push:
+  pull_request:
+    types:
+      - "opened"
+      - "reopened"
+      - "auto_merge_enabled"
     branches:
       - main
 
@@ -15,8 +19,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: yarn
-      - run: yarn install pnpm -g && pnpm i
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
 
       - name: Build
         run: pnpm run -C doc docs:build
