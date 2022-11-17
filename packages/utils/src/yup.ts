@@ -1,6 +1,6 @@
 import * as yup from 'yup';
-import { RootSchema } from './../tool/type';
-import { ValidateRule } from './../cell/type';
+import { RootSchema } from '../../vue/src/tool/type';
+import { ValidateRule } from '../../vue/src/cell/type';
 
 const noParamsRule = ['required'];
 

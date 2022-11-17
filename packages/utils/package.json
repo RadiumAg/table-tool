@@ -1,18 +1,15 @@
 {
-  "name": "@table-tool/vue",
+  "name": "@table-tool/utils",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "peerDependencies": {
-    "vue": "^3.0.0"
-  },
   "dependencies": {
-    "@table-tool/utils": "workspace:*",
-    "vue": "^3.2.44",
     "yup": "^0.32.11"
   }
 }

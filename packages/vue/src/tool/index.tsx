@@ -1,7 +1,7 @@
 import { defineComponent, provide, ref, watch } from 'vue';
 import { editCell } from '../cell/cell';
 import { Cell } from '../cell/type';
-import { getSchema } from '../utils/yup';
+import { getSchema } from '@table-tool/utils/src/yup';
 import { TABLE_TOOL_PROVIDE_KEY, ToolProps } from './tool';
 import { RootSchema, TableToolProvide } from './type';
 

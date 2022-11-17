@@ -10,10 +10,10 @@ import {
   watch,
 } from 'vue';
 import { ValidationError } from 'yup';
+import { getSchema } from '@table-tool/utils';
 import ErrorMessage from '../error-message';
 import { TABLE_TOOL_PROVIDE_KEY } from '../tool/tool';
 import { RootSchema, TableToolProvide } from '../tool/type';
-import { getSchema } from '../utils/yup';
 import {
   activeCell,
   editCell,
