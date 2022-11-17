@@ -11,23 +11,23 @@ export default defineComponent({
     const cellArray = ref<Cell[]>([]);
     const rootSchema = ref<RootSchema>([]);
 
-    const editCellValidate = async () => {
-      if (!editCell.value?.exposed) return;
-      if (!(await editCell.value.exposed.validate())) {
-        editCell.value.exposed.focus();
-      }
-    };
-
-    const validate = (rows: any, callback: ValidateCallback) => {
+    const validate = (rows?: any, callback?: ValidateCallback) => {
       if (!rows) {
         if (!editCell.value) return;
-        return Promise.resolve().then(editCellValidate);
+        return Promise.resolve().then(async () => {
+          if (!editCell.value?.exposed) return;
+          if (!(await editCell.value.exposed.validate())) {
+            editCell.value.exposed.focus();
+            callback && callback();
+          }
+        });
       } else if (isObject(rows)) {
         const targetRow = cellArray.value.find(cell => cell.row === rows);
         if (!targetRow) return;
         return Promise.resolve().then(async () => {
           if (!(await targetRow.validate())) {
             targetRow.focus();
+            callback && callback();
           }
         });
       } else if (Array.isArray(rows)) {
@@ -37,12 +37,13 @@ export default defineComponent({
             if (!targetRow) return;
             if (!(await targetRow.validate())) {
               targetRow.focus();
+              callback && callback();
+
               break;
             }
           }
         });
       }
-      callback();
     };
 
     provide<TableToolProvide>(TABLE_TOOL_PROVIDE_KEY, {
