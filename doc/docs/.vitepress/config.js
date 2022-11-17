@@ -1,4 +1,5 @@
 export default {
+  base: '/table-tool',
   lang: 'zh-cn',
   title: 'TableTool',
   description: '强化表格,让表格更容易使用',
