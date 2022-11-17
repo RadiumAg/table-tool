@@ -1,4 +1,5 @@
-name: TableTool publish
+name: Deploy
+
 on:
   pull_request:
     types:
@@ -7,21 +8,26 @@ on:
       - "auto_merge_enabled"
     branches:
       - main
+
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@v2.3.1
-
-      - name: Install and Build 🔧 # This example project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
-        run: |
-          npm i pnpm -g
-          pnpm i
-          pnpm run -C doc docs:build
-
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@4.1.1
+      - uses: actions/checkout@v3
         with:
-          branch: docs # The branch the action should deploy to.
-          folder: doc/docs/.vitepress/dist # The folder the action should deploy.
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: npm
+      - run: npm  i pnpm -g && pnpm i 
+
+      - name: Build
+        run: pnpm run -C doc docs:build
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/.vitepress/dist
+          # cname: example.com # if wanna deploy to custom domain
