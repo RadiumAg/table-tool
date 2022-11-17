@@ -1,11 +1,7 @@
 name: Deploy
 
 on:
-  pull_request:
-    types:
-      - "opened"
-      - "reopened"
-      - "auto_merge_enabled"
+  push:
     branches:
       - main
 
@@ -19,8 +15,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: npm
-      - run: npm  i pnpm -g && pnpm i 
+          cache: yarn
+      - run: yarn install pnpm -g && pnpm i
 
       - name: Build
         run: pnpm run -C doc docs:build
