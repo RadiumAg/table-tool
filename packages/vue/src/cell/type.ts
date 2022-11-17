@@ -3,7 +3,9 @@ import { ComponentInternalInstance } from 'vue';
 type Trigger = 'blur' | 'change';
 
 export type Cell = {
-  validate: (name: string) => Promise<unknown> | unknown;
+  row: unknown;
+  focus: () => void;
+  validate: () => Promise<boolean | undefined>;
 };
 
 export type CellInstance = Omit<ComponentInternalInstance, 'exposed'> & {

@@ -22,6 +22,7 @@ import {
   otherAreaClick,
 } from './cell';
 import Style from './index.module.scss';
+import { CellInstance } from './type';
 
 export default defineComponent({
   props: editCellProps,
@@ -176,12 +177,14 @@ export default defineComponent({
     });
 
     cellArray.value.push({
+      row: props.row,
       validate,
+      focus: setFocus,
     });
 
     expose({
-      focus: setFocus,
       validate,
+      focus: setFocus,
     });
 
     return () => {
@@ -191,7 +194,7 @@ export default defineComponent({
           ref={containerRef}
           onMousedown={event => {
             event.stopPropagation();
-            editCell.value = currentInstance;
+            editCell.value = currentInstance as CellInstance;
             setFocus();
           }}
         >

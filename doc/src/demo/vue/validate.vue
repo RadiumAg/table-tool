@@ -1,10 +1,18 @@
 <template>
   <div class="button-group">
     <el-button @click="handleValidate">快速校验</el-button>
+    <el-button @click="handleSelectionValidate">选中行校验</el-button>
   </div>
 
   <tool ref="toolRef" :data="tableData">
-    <el-table border height="400" :data="tableData">
+    <el-table
+      border
+      height="400"
+      :data="tableData"
+      @selection-change="handleSelectionChange"
+    >
+      <el-table-column type="selection"></el-table-column>
+
       <el-table-column type="index" label="序号" width="60px"></el-table-column>
 
       <el-table-column
@@ -76,11 +84,19 @@ import { ref } from 'vue';
 import { UserList, useData } from '../../utils/data';
 
 const tableData = ref<UserList>([]);
-
-const toolRef = ref<InstanceType<typeof Tool>>();
+const toolRef = ref();
+const selectionRows = ref([]);
 
 const handleValidate = () => {
   toolRef.value.validate();
+};
+
+const handleSelectionValidate = () => {
+  toolRef.value.validate(selectionRows.value);
+};
+
+const handleSelectionChange = (selection: []) => {
+  selectionRows.value = selection;
 };
 
 useData(100, tableData);

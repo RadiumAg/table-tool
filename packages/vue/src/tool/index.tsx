@@ -1,7 +1,7 @@
 import { defineComponent, provide, ref, watch } from 'vue';
+import { ValidateCallback, getSchema, isObject } from '@table-tool/utils';
 import { editCell } from '../cell/cell';
 import { Cell } from '../cell/type';
-import { getSchema } from '@table-tool/utils/src/yup';
 import { TABLE_TOOL_PROVIDE_KEY, ToolProps } from './tool';
 import { RootSchema, TableToolProvide } from './type';
 
@@ -11,17 +11,38 @@ export default defineComponent({
     const cellArray = ref<Cell[]>([]);
     const rootSchema = ref<RootSchema>([]);
 
-    const cellValidate = async () => {
+    const editCellValidate = async () => {
       if (!editCell.value?.exposed) return;
       if (!(await editCell.value.exposed.validate())) {
         editCell.value.exposed.focus();
       }
     };
 
-    const validate = () => {
-      if (!editCell.value) return;
-
-      return Promise.resolve().then(cellValidate);
+    const validate = (rows: any, callback: ValidateCallback) => {
+      if (!rows) {
+        if (!editCell.value) return;
+        return Promise.resolve().then(editCellValidate);
+      } else if (isObject(rows)) {
+        const targetRow = cellArray.value.find(cell => cell.row === rows);
+        if (!targetRow) return;
+        return Promise.resolve().then(async () => {
+          if (!(await targetRow.validate())) {
+            targetRow.focus();
+          }
+        });
+      } else if (Array.isArray(rows)) {
+        return Promise.resolve().then(async () => {
+          for (const row of rows) {
+            const targetRow = cellArray.value.find(cell => cell.row === row);
+            if (!targetRow) return;
+            if (!(await targetRow.validate())) {
+              targetRow.focus();
+              break;
+            }
+          }
+        });
+      }
+      callback();
     };
 
     provide<TableToolProvide>(TABLE_TOOL_PROVIDE_KEY, {
