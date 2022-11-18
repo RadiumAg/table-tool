@@ -5,7 +5,7 @@ export type UserList = {
   age: number;
   job: string;
   name: string;
-  phone: string;
+  email: string;
   address: string;
   favorite: string;
 }[];
@@ -31,7 +31,7 @@ export const useData = async (
       i++;
       count++;
       dataRef.value.push({
-        phone: mockJs.mock('phone'),
+        email: mockJs.mock('@email'),
         name: mockJs.mock('@name'),
         address: mockJs.mock('@province'),
         age: Math.floor(Math.random() * 40),

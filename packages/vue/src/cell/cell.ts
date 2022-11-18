@@ -1,9 +1,4 @@
-import {
-  ComponentInternalInstance,
-  PropType,
-  getCurrentInstance,
-  ref,
-} from 'vue';
+import { PropType, ref } from 'vue';
 import { CellInstance, ValidateRule } from './type';
 
 export const editCellProps = {

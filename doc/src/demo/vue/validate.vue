@@ -32,10 +32,10 @@
         </template>
       </el-table-column>
 
-      <el-table-column prop="phone" label="联系方式" width="100">
+      <el-table-column prop="email" label="联系方式" width="100">
         <template #default="{ row }">
-          <edit-cell :row="row" field="phone">
-            <el-input v-model="row.phone"></el-input>
+          <edit-cell :row="row" field="email">
+            <el-input v-model="row.email"></el-input>
           </edit-cell>
         </template>
       </el-table-column>
