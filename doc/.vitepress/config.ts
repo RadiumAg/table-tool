@@ -39,7 +39,7 @@ export default defineConfigWithTheme<ThemeConfig>({
   extends: baseConfig,
   base: process.env.NODE_ENV === 'production' ? '/table-tool/' : '/',
   lang: 'zh-cn',
-  title: 'TableTool',
+  title: 'Table Tool',
   srcDir: 'src',
   scrollOffset: 'header',
   description: '强化表格,让表格更容易使用',
