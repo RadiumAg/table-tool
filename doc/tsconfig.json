@@ -1,0 +1,10 @@
+{
+ "extends": "../tsconfig.json",
+ "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@demo/*": ["./src/demo/*"]
+    }
+ },
+ "include": ["env.d.ts", "src/**/*", ".vitepress/**/*"]
+}

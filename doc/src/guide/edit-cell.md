@@ -1,5 +1,5 @@
 <script setup>
-import EditCell from '../src/demo/vue/edit-cell.vue'
+import EditCell from '@demo/vue/edit-cell.vue'
 </script>
 
 

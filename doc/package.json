@@ -4,14 +4,15 @@
   "description": "tool box's doc",
   "main": "index.js",
   "scripts": {
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
-    "docs:serve": "vitepress serve docs"
+    "docs:dev": "vitepress",
+    "docs:build": "vitepress build",
+    "docs:serve": "vitepress serve"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^18.11.9",
     "@vitejs/plugin-vue": "^3.2.0",
     "@vitejs/plugin-vue-jsx": "^2.1.1",
     "sass": "^1.56.1",
@@ -24,6 +25,7 @@
     "@table-tool/react": "workspace:*",
     "@table-tool/vue": "workspace:*",
     "@types/mockjs": "^1.0.7",
+    "@vue/theme": "^1.2.2",
     "element-plus": "^2.2.21",
     "mockjs": "^1.1.0"
   }

@@ -15,7 +15,7 @@
       </template>
     </el-table-column>
 
-    <el-table-column prop="email" label="联系方式" width="100">
+    <el-table-column prop="email" label="联系方式" width="200">
       <template #default="{ row }">
         <edit-cell :row="row" field="email">
           <el-input v-model="row.email"></el-input>
@@ -58,8 +58,6 @@
 </template>
 
 <script lang="ts" setup>
-import 'element-plus/theme-chalk/dark/css-vars.css';
-import 'element-plus/theme-chalk/index.css';
 import { Cell as EditCell } from '@table-tool/vue';
 import { ElInput, ElTable, ElTableColumn, vLoading } from 'element-plus';
 import { ref } from 'vue';
