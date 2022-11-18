@@ -18,7 +18,7 @@
       <el-table-column
         prop="name"
         label="名称"
-        width="200px"
+        width="180px"
         show-overflow-tooltip
       >
         <template #default="{ row }">
@@ -32,7 +32,7 @@
         </template>
       </el-table-column>
 
-      <el-table-column prop="email" label="联系方式" width="100">
+      <el-table-column prop="email" label="联系方式" width="200">
         <template #default="{ row }">
           <edit-cell :row="row" field="email">
             <el-input v-model="row.email"></el-input>
@@ -64,7 +64,7 @@
         </template>
       </el-table-column>
 
-      <el-table-column prop="address" label="地址">
+      <el-table-column prop="address" label="地址" width="150">
         <template #default="{ row }">
           <edit-cell :row="row" field="address">
             <el-input v-model="row.address"></el-input>
@@ -102,6 +102,7 @@ useData(100, tableData);
 
 <style lang="scss" scoped>
 .button-group {
+  margin-top: 20px;
   margin-bottom: 10px;
 }
 </style>

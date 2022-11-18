@@ -7,6 +7,15 @@ import type { Config as ThemeConfig } from '@vue/theme';
 const sidebar: ThemeConfig['sidebar'] = {
   '/guide/': [
     {
+      text: '介绍',
+      items: [
+        {
+          text: '开始',
+          link: '/guide/introduce',
+        },
+      ],
+    },
+    {
       text: '基础使用',
       items: [
         {
