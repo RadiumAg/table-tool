@@ -11,8 +11,8 @@
     "vue": "^3.0.0"
   },
   "dependencies": {
+    "@table-tool/utils": "workspace:*",
     "vue": "^3.2.44",
     "yup": "^0.32.11"
   }
 }
-

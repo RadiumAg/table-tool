@@ -71,9 +71,11 @@ importers:
 
   packages/vue:
     specifiers:
+      '@table-tool/utils': workspace:*
       vue: ^3.2.44
       yup: ^0.32.11
     dependencies:
+      '@table-tool/utils': link:../utils
       vue: 3.2.44
       yup: 0.32.11
 

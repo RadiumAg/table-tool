@@ -1,10 +1,18 @@
 <template>
   <div class="button-group">
     <el-button @click="handleValidate">快速校验</el-button>
+    <el-button @click="handleSelectionValidate">选中行校验</el-button>
   </div>
 
   <tool ref="toolRef" :data="tableData">
-    <el-table border height="400" :data="tableData">
+    <el-table
+      border
+      height="400"
+      :data="tableData"
+      @selection-change="handleSelectionChange"
+    >
+      <el-table-column type="selection"></el-table-column>
+
       <el-table-column type="index" label="序号" width="60px"></el-table-column>
 
       <el-table-column
@@ -24,10 +32,10 @@
         </template>
       </el-table-column>
 
-      <el-table-column prop="phone" label="联系方式" width="100">
+      <el-table-column prop="email" label="联系方式" width="100">
         <template #default="{ row }">
-          <edit-cell :row="row" field="phone">
-            <el-input v-model="row.phone"></el-input>
+          <edit-cell :row="row" field="email">
+            <el-input v-model="row.email"></el-input>
           </edit-cell>
         </template>
       </el-table-column>
@@ -76,11 +84,19 @@ import { ref } from 'vue';
 import { UserList, useData } from '../../utils/data';
 
 const tableData = ref<UserList>([]);
-
-const toolRef = ref<InstanceType<typeof Tool>>();
+const toolRef = ref();
+const selectionRows = ref([]);
 
 const handleValidate = () => {
   toolRef.value.validate();
+};
+
+const handleSelectionValidate = () => {
+  toolRef.value.validate(selectionRows.value);
+};
+
+const handleSelectionChange = (selection: []) => {
+  selectionRows.value = selection;
 };
 
 useData(100, tableData);
