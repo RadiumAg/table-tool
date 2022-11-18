@@ -1,6 +1,6 @@
 ### **文档**
 
-[TableTool | TableTool](https://radiumag.github.io/table-tool/)
+[Table Tool](https://radiumag.github.io/table-tool/)
 
 
 
