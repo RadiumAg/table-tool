@@ -1,7 +1,7 @@
 {
   "name": "doc",
   "version": "1.0.0",
-  "description": "tool box's doc",
+  "description": "table-tool's doc",
   "main": "index.js",
   "scripts": {
     "docs:dev": "vitepress",

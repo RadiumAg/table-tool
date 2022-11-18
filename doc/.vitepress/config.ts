@@ -7,6 +7,15 @@ import type { Config as ThemeConfig } from '@vue/theme';
 const sidebar: ThemeConfig['sidebar'] = {
   '/guide/': [
     {
+      text: '介绍',
+      items: [
+        {
+          text: '开始',
+          link: '/guide/introduce',
+        },
+      ],
+    },
+    {
       text: '基础使用',
       items: [
         {
@@ -30,7 +39,7 @@ export default defineConfigWithTheme<ThemeConfig>({
   extends: baseConfig,
   base: process.env.NODE_ENV === 'production' ? '/table-tool/' : '/',
   lang: 'zh-cn',
-  title: 'TableTool',
+  title: 'Table Tool',
   srcDir: 'src',
   scrollOffset: 'header',
   description: '强化表格,让表格更容易使用',
