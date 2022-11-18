@@ -76,11 +76,9 @@
 </template>
 
 <script lang="ts" setup>
-import 'element-plus/theme-chalk/dark/css-vars.css';
-import 'element-plus/theme-chalk/index.css';
-import { Cell as EditCell, Tool } from '@table-tool/vue';
 import { ElButton, ElInput, ElTable, ElTableColumn } from 'element-plus';
 import { ref } from 'vue';
+import { Cell as EditCell, Tool } from '@table-tool/vue';
 import { UserList, useData } from '../../utils/data';
 
 const tableData = ref<UserList>([]);

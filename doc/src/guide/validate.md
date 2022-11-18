@@ -1,5 +1,5 @@
 <script setup>
-import Validate from '../src/demo/vue/validate.vue'
+import Validate from '@demo/vue/validate.vue'
 </script>
 
 
