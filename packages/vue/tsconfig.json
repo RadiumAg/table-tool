@@ -5,5 +5,9 @@
     "jsxFactory": "h",
     "jsxFragmentFactory": "Fragment",
     "lib": ["DOM","ESNext"]
-  }
+  },
+  "include": [
+    "../../env.d.ts",
+    "src/**/*"
+]
 }

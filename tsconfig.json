@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
-    "lib": ["DOM","ESNext"],
+    "lib": [
+      "DOM",
+      "ESNext"
+    ],
     "target": "ESNext",
     "module": "ESNext",
     "composite": true,
@@ -8,7 +11,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "declaration":true,
+    "declaration": true,
     "skipLibCheck": true,
     "baseUrl": ".",
     "noImplicitAny": false

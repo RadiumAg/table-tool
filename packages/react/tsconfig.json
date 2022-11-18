@@ -3,6 +3,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "jsx": "preserve",
-    "lib": ["DOM","ESNext"],
-  },
+    "lib": [
+      "DOM",
+      "ESNext"
+    ]
+  }
 }
