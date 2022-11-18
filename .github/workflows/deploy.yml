@@ -35,5 +35,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: doc/docs/.vitepress/dist
+          publish_dir: doc/.vitepress/dist
           # cname: example.com # if wanna deploy to custom domain
