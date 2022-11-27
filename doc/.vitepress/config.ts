@@ -67,6 +67,10 @@ export default defineConfigWithTheme<ThemeConfig>({
       alias: {
         '@demo': path.resolve(__dirname, '../src/demo'),
         '@theme': path.resolve(__dirname, './theme'),
+        '@table-tool/vue': path.resolve(
+          __dirname,
+          '../../packages/vue/src/index.ts',
+        ),
       },
     },
     css: {
