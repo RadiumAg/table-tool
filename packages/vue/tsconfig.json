@@ -1,7 +1,6 @@
 {
  "compilerOptions": {
    "jsx": "preserve",
-   "rootDir": ".",
    "skipLibCheck": true,
    "declaration": true,
    "noImplicitAny": false,

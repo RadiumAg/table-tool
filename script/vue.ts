@@ -3,14 +3,14 @@ import vueJsx from '@vitejs/plugin-vue-jsx';
 import dts from 'rollup-plugin-dts';
 import postcss from 'rollup-plugin-postcss';
 import esbuild from 'rollup-plugin-esbuild';
-import { getPackageInfoSync } from 'local-pkg';
 import { InputPluginOption, rollup } from 'rollup';
+import { getInfo } from './common';
 
+const info = getInfo('@table-tool/vue');
 export const external = ['yup', '@table-tool/utils', 'vue'];
 
 export const getPlugins = (minify: boolean) => {
-  const { outDir } = getInfo();
-  if (!outDir) return;
+  if (!info) return;
 
   return [
     vueJsx(),
@@ -25,26 +25,12 @@ export const getPlugins = (minify: boolean) => {
   ] as InputPluginOption[];
 };
 
-export const getInfo = () => {
-  const info = getPackageInfoSync('@table-tool/vue');
-
-  if (!info)
-    return { inputPath: undefined, outDir: undefined, name: undefined };
-
-  return {
-    inputPath: path.resolve(info.rootPath, './src/index.ts'),
-    outDir: path.resolve(info.rootPath, './dist'),
-    name: info.name.replaceAll('@', '').replace('/', '-'),
-  };
-};
-
-export const bundle = async (minify: boolean) => {
-  const { inputPath, outDir, name } = getInfo();
-  if (!inputPath || !outDir) return;
+const bundle = async (minify: boolean) => {
+  if (!info) return;
 
   const build = await rollup({
     plugins: getPlugins(minify),
-    input: [inputPath],
+    input: [info.inputfile],
     external,
     output: {
       globals: {
@@ -56,15 +42,24 @@ export const bundle = async (minify: boolean) => {
 
   Promise.all([
     build.write({
-      file: path.resolve(outDir, `${name}.esm${minify ? '.prod' : ''}.mjs`),
+      file: path.resolve(
+        info.outDir,
+        `${info.name}.esm${minify ? '.prod' : ''}.mjs`,
+      ),
       format: 'esm',
     }),
     build.write({
-      file: path.resolve(outDir, `${name}.cjs${minify ? '.prod' : ''}.js`),
+      file: path.resolve(
+        info.outDir,
+        `${info.name}.cjs${minify ? '.prod' : ''}.js`,
+      ),
       format: 'cjs',
     }),
     build.write({
-      file: path.resolve(outDir, `${name}.global${minify ? '.prod' : ''}.js`),
+      file: path.resolve(
+        info.outDir,
+        `${info.name}.global${minify ? '.prod' : ''}.js`,
+      ),
       format: 'iife',
       name: 'ToolBoxVue',
       globals: {
@@ -75,17 +70,20 @@ export const bundle = async (minify: boolean) => {
   ]);
 };
 
-export const buildType = async () => {
-  const { inputPath, outDir } = getInfo();
-  if (!inputPath) return;
+const buildType = async () => {
+  if (!info) return;
 
   const build = await rollup({
-    input: [path.resolve(outDir, '../types/src/index.d.ts')],
+    input: [path.resolve(info.outDir, '../types/index.d.ts')],
     plugins: [dts()],
   });
 
   build.write({
     format: 'cjs',
-    file: path.resolve(outDir, './table-tool-vue.d.ts'),
+    file: path.resolve(info.outDir, './table-tool-vue.d.ts'),
   });
+};
+
+export const runBundle = async () => {
+  await Promise.all([bundle(true), bundle(false), buildType()]);
 };

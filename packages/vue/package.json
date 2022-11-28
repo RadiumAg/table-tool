@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build":"esno ../../script/build",
-    "build-types":"vue-tsc --declaration --emitDeclarationOnly --skipLibCheck"
+    "build:vue":"pnpm run build:types && esno ../../script/build",
+    "build:types":"vue-tsc"
   },
   "keywords": [],
   "author": "",
