@@ -44,7 +44,7 @@ const bundle = async (minify: boolean) => {
     build.write({
       file: path.resolve(
         info.outDir,
-        `${info.name}.esm${minify ? '.prod' : ''}.mjs`,
+        `${info.name}.esm${minify ? '.prod' : ''}.js`,
       ),
       format: 'esm',
     }),

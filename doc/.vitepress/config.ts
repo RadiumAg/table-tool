@@ -71,6 +71,10 @@ export default defineConfigWithTheme<ThemeConfig>({
           __dirname,
           '../../packages/vue/src/index.ts',
         ),
+        '@table-tool/utils': path.resolve(
+          __dirname,
+          '../../packages/utils/src/index.ts',
+        ),
       },
     },
     css: {

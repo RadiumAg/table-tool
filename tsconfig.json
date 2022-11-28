@@ -16,8 +16,12 @@
     "paths": {
       "@table-tool/*": [
         "packages/*/src"
+      ],
+      "@demo/vue": [
+        "doc/src/demo/vue/index.ts"
       ]
     }
   },
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "include": ["doc/**/*","doc/.vitepress/**/*"]
 }
