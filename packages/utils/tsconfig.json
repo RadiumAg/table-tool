@@ -1,11 +1,16 @@
 {
- "extends": "../../tsconfig.json",
- "compilerOptions": {
-   "rootDir": ".",
-   "skipLibCheck": true,
-   "emitDeclarationOnly": true,
-   "declarationDir": "./types"
- },
- "exclude": ["node_modules/**/*"],
- "include": ["src/**/*","../../env.d.ts"]
+  "compilerOptions": {
+    "composite": true,
+    "declaration": true,
+    "skipLibCheck": true,
+    "emitDeclarationOnly": true,
+    "declarationDir": "./types"
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "src/**/*",
+    "../../env.d.ts"
+  ]
 }

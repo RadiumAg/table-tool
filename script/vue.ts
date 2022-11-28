@@ -4,7 +4,7 @@ import dts from 'rollup-plugin-dts';
 import postcss from 'rollup-plugin-postcss';
 import esbuild from 'rollup-plugin-esbuild';
 import { InputPluginOption, rollup } from 'rollup';
-import { getInfo } from './common';
+import { buildType, getInfo } from './common';
 
 const info = getInfo('@table-tool/vue');
 export const external = ['yup', '@table-tool/utils', 'vue'];
@@ -70,20 +70,6 @@ const bundle = async (minify: boolean) => {
   ]);
 };
 
-const buildType = async () => {
-  if (!info) return;
-
-  const build = await rollup({
-    input: [path.resolve(info.outDir, '../types/index.d.ts')],
-    plugins: [dts()],
-  });
-
-  build.write({
-    format: 'cjs',
-    file: path.resolve(info.outDir, './table-tool-vue.d.ts'),
-  });
-};
-
 export const runBundle = async () => {
-  await Promise.all([bundle(true), bundle(false), buildType()]);
+  await Promise.all([bundle(true), bundle(false), buildType(info)]);
 };

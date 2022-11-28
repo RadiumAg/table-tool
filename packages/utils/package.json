@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "the table-tool's utils",
   "main": "index.js",
+  "types": "./dist/",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:types": "tsc --skipLibCheck"
   },
   "keywords": [],
   "author": "",
