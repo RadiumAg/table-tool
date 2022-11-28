@@ -1,18 +1,22 @@
 import path from 'path';
+import ts from 'rollup-plugin-ts';
 import esbuild from 'rollup-plugin-esbuild';
 import { getPackageInfoSync } from 'local-pkg';
 import { InputPluginOption, rollup } from 'rollup';
 
 export const external = ['yup', '@table-tool/utils', 'vue'];
 
-export const getPlugins = (minify: boolean) =>
-  [
+export const getPlugins = (minify: boolean) => {
+  const { outDir } = getInfo();
+  if (!outDir) return;
+
+  return [
     esbuild({
       minify,
       target: 'esnext',
     }),
   ] as InputPluginOption[];
-
+};
 export const getInfo = () => {
   const info = getPackageInfoSync('@table-tool/utils');
 

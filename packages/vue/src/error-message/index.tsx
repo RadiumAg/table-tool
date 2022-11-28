@@ -7,7 +7,7 @@ export default defineComponent({
   setup(props) {
     return () => {
       return (
-        props.message && <div className={Style.messageBox}>{props.message}</div>
+        props.message && <div class={Style.messageBox}>{props.message}</div>
       );
     };
   },

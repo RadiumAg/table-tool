@@ -2,23 +2,24 @@ import path from 'path';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import esbuild from 'rollup-plugin-esbuild';
 import postcss from 'rollup-plugin-postcss';
+import ts from 'rollup-plugin-ts';
 import { getPackageInfoSync } from 'local-pkg';
 import { InputPluginOption, rollup } from 'rollup';
 
 export const external = ['yup', '@table-tool/utils', 'vue'];
 
-export const getPlugins = (minify: boolean) =>
-  [
+export const getPlugins = (minify: boolean) => {
+  const { outDir } = getInfo();
+  if (!outDir) return;
+
+  return [
     vueJsx(),
-    esbuild({
-      minify,
-      target: 'esnext',
-    }),
     postcss({
       minimize: minify,
       modules: true,
     }),
   ] as InputPluginOption[];
+};
 
 export const getInfo = () => {
   const info = getPackageInfoSync('@table-tool/vue');
@@ -41,6 +42,12 @@ export const bundle = async (minify: boolean) => {
     plugins: getPlugins(minify),
     input: [inputPath],
     external,
+    output: {
+      globals: {
+        vue: 'vue',
+        yup: 'yup',
+      },
+    },
   });
 
   Promise.all([
