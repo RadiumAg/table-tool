@@ -1,8 +1,8 @@
 import path from 'path';
 import vueJsx from '@vitejs/plugin-vue-jsx';
-import esbuild from 'rollup-plugin-esbuild';
+import dts from 'rollup-plugin-dts';
 import postcss from 'rollup-plugin-postcss';
-import ts from 'rollup-plugin-ts';
+import esbuild from 'rollup-plugin-esbuild';
 import { getPackageInfoSync } from 'local-pkg';
 import { InputPluginOption, rollup } from 'rollup';
 
@@ -14,6 +14,10 @@ export const getPlugins = (minify: boolean) => {
 
   return [
     vueJsx(),
+    esbuild({
+      target: 'esnext',
+      minify,
+    }),
     postcss({
       minimize: minify,
       modules: true,
@@ -69,4 +73,19 @@ export const bundle = async (minify: boolean) => {
       },
     }),
   ]);
+};
+
+export const buildType = async () => {
+  const { inputPath, outDir } = getInfo();
+  if (!inputPath) return;
+
+  const build = await rollup({
+    input: [path.resolve(outDir, '../types/src/index.d.ts')],
+    plugins: [dts()],
+  });
+
+  build.write({
+    format: 'cjs',
+    file: path.resolve(outDir, './table-tool-vue.d.ts'),
+  });
 };

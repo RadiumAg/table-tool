@@ -24,6 +24,7 @@
     "postcss": "^8.4.19",
     "rimraf": "^3.0.2",
     "rollup": "^3.4.0",
+    "rollup-plugin-dts": "^5.0.0",
     "rollup-plugin-esbuild": "4.8.2",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-ts": "^3.0.2",

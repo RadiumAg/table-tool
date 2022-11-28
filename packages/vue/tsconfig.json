@@ -1,10 +1,10 @@
 {
- "extends": "../../tsconfig.json",
  "compilerOptions": {
    "jsx": "preserve",
    "rootDir": ".",
    "skipLibCheck": true,
    "declaration": true,
+   "noImplicitAny": false,
    "emitDeclarationOnly": true,
    "declarationDir": "./types"
  },

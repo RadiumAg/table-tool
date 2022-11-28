@@ -5,8 +5,8 @@ declare const _default: import("vue").DefineComponent<{
     };
     editRender: {
         type: import("vue").PropType<{
-            autofocus?: string | undefined;
-            autoselect?: string | undefined;
+            autofocus: string;
+            autoselect: string;
         }>;
     };
     editRules: {
@@ -32,8 +32,8 @@ declare const _default: import("vue").DefineComponent<{
     };
     editRender: {
         type: import("vue").PropType<{
-            autofocus?: string | undefined;
-            autoselect?: string | undefined;
+            autofocus: string;
+            autoselect: string;
         }>;
     };
     editRules: {
@@ -53,6 +53,6 @@ declare const _default: import("vue").DefineComponent<{
         required: boolean;
     };
 }>> & {
-    [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
+    [x: `on${Capitalize<string>}`]: (...args: any[]) => any;
 }, {}>;
 export default _default;

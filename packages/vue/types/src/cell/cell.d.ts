@@ -7,8 +7,8 @@ export declare const editCellProps: {
     };
     editRender: {
         type: PropType<{
-            autofocus?: string | undefined;
-            autoselect?: string | undefined;
+            autofocus: string;
+            autoselect: string;
         }>;
     };
     editRules: {
@@ -29,6 +29,6 @@ export declare const editCellProps: {
     };
 };
 export declare const editCellEmits: string[];
-export declare const editCell: import("vue").Ref<CellInstance | null | undefined>;
-export declare const activeCell: import("vue").Ref<HTMLDivElement | null | undefined>;
+export declare const editCell: import("vue").Ref<CellInstance>;
+export declare const activeCell: import("vue").Ref<HTMLDivElement>;
 export declare const otherAreaClick: () => void;

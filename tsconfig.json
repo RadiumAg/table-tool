@@ -6,8 +6,6 @@
     ],
     "target": "ESNext",
     "module": "ESNext",
-    "composite": true,
-    "jsx": "preserve",
     "moduleResolution": "Node",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -20,5 +18,6 @@
         "packages/*/src"
       ]
     }
-  }
+  },
+  "exclude": ["node_modules"]
 }

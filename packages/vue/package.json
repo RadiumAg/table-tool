@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build":"esno ../../script/build",
-    "build-types":"vue-tsc --declaration --emitDeclarationOnly"
+    "build-types":"vue-tsc --declaration --emitDeclarationOnly --skipLibCheck"
   },
   "keywords": [],
   "author": "",

@@ -8,8 +8,8 @@ export const editCellProps = {
   },
   editRender: {
     type: Object as PropType<{
-      autofocus?: string;
-      autoselect?: string;
+      autofocus: string;
+      autoselect: string;
     }>,
   },
   editRules: {
