@@ -1,5 +1,6 @@
 import { PropType, ref } from 'vue';
-import { CellInstance, ValidateRule } from './type';
+import { ValidateRule } from '@table-tool/utils';
+import { CellInstance } from './type';
 
 export const editCellProps = {
   row: {

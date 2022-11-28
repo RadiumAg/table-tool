@@ -5,6 +5,7 @@
   "homepage": "https://[username].github.io/tool-box",
   "main": "index.js",
   "scripts": {
+    "build":"pnpm run -C ./packages/vue build:vue && pnpm run -C ./packages/utils build:utils",
     "clear-node_module": "rimraf node_modules"
   },
   "keywords": [],

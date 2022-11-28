@@ -3,6 +3,8 @@
    "jsx": "preserve",
    "skipLibCheck": true,
    "declaration": true,
+   "module": "ESNext",
+   "moduleResolution": "Node",
    "noImplicitAny": false,
    "emitDeclarationOnly": true,
    "declarationDir": "./types"

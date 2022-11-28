@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "the table-tool's utils",
   "main": "index.js",
-  "types": "./dist/",
+  "types": "./dist/table-tool-utils.d.ts",
   "scripts": {
-    "build:types": "tsc --skipLibCheck"
+    "build:utils":"pnpm run build:types && esno ../../script/build --type=utils",
+    "build:types": "tsc --skipLibCheck --declaration --emitDeclarationOnly "
   },
   "keywords": [],
   "author": "",

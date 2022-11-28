@@ -16,7 +16,7 @@ declare const _default: import("vue").DefineComponent<{
             max: number;
             type: "string" | "number" | "array" | "date";
             pattern: string | RegExp;
-            validator: import("./type").ValidatorFunction;
+            validator: import("@table-tool/utils").ValidatorFunction;
             message: string;
             trigger: "blur" | "change";
         }>[]>;
@@ -43,7 +43,7 @@ declare const _default: import("vue").DefineComponent<{
             max: number;
             type: "string" | "number" | "array" | "date";
             pattern: string | RegExp;
-            validator: import("./type").ValidatorFunction;
+            validator: import("@table-tool/utils").ValidatorFunction;
             message: string;
             trigger: "blur" | "change";
         }>[]>;

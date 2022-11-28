@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
-    "composite": true,
     "declaration": true,
-    "skipLibCheck": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
     "emitDeclarationOnly": true,
+    "skipLibCheck": true,
     "declarationDir": "./types"
   },
   "exclude": [
