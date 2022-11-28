@@ -1,11 +1,17 @@
-import { bundle as utilsBundle } from './utils';
-import { bundle as vueBundle } from './vue';
+import { runBundle as vueRunBundle } from './vue';
+import { runBundle as utilsRunBundle } from './utils';
+import { getArgv } from './common';
 
 (async () => {
-  Promise.all([
-    vueBundle(true),
-    vueBundle(false),
-    utilsBundle(true),
-    utilsBundle(false),
-  ]);
+  const argObj = getArgv();
+
+  if (argObj && argObj.type) {
+    const type = argObj.type;
+
+    if (type === 'vue') {
+      vueRunBundle();
+    } else if (type === 'utils') {
+      utilsRunBundle();
+    }
+  }
 })();

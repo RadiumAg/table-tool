@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "types": "./dist/table-tool-vue.d.ts",
+  "scripts": {
+    "build:vue":"pnpm run build:types && esno ../../script/build --type=vue",
+    "build:types":"vue-tsc"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

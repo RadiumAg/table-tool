@@ -1,59 +1,65 @@
 import path from 'path';
 import vueJsx from '@vitejs/plugin-vue-jsx';
-import esbuild from 'rollup-plugin-esbuild';
+import dts from 'rollup-plugin-dts';
 import postcss from 'rollup-plugin-postcss';
-import { getPackageInfoSync } from 'local-pkg';
+import esbuild from 'rollup-plugin-esbuild';
 import { InputPluginOption, rollup } from 'rollup';
+import { buildType, getInfo } from './common';
 
+const info = getInfo('@table-tool/vue');
 export const external = ['yup', '@table-tool/utils', 'vue'];
 
-export const getPlugins = (minify: boolean) =>
-  [
+export const getPlugins = (minify: boolean) => {
+  if (!info) return;
+
+  return [
     vueJsx(),
     esbuild({
-      minify,
       target: 'esnext',
+      minify,
     }),
     postcss({
       minimize: minify,
       modules: true,
     }),
   ] as InputPluginOption[];
-
-export const getInfo = () => {
-  const info = getPackageInfoSync('@table-tool/vue');
-
-  if (!info)
-    return { inputPath: undefined, outDir: undefined, name: undefined };
-
-  return {
-    inputPath: path.resolve(info.rootPath, './src/index.ts'),
-    outDir: path.resolve(info.rootPath, './dist'),
-    name: info.name.replaceAll('@', '').replace('/', '-'),
-  };
 };
 
-export const bundle = async (minify: boolean) => {
-  const { inputPath, outDir, name } = getInfo();
-  if (!inputPath || !outDir) return;
+const bundle = async (minify: boolean) => {
+  if (!info) return;
 
   const build = await rollup({
     plugins: getPlugins(minify),
-    input: [inputPath],
+    input: [info.inputfile],
     external,
+    output: {
+      globals: {
+        vue: 'vue',
+        yup: 'yup',
+      },
+    },
   });
 
   Promise.all([
     build.write({
-      file: path.resolve(outDir, `${name}.esm${minify ? '.prod' : ''}.mjs`),
+      file: path.resolve(
+        info.outDir,
+        `${info.name}.esm${minify ? '.prod' : ''}.mjs`,
+      ),
       format: 'esm',
     }),
     build.write({
-      file: path.resolve(outDir, `${name}.cjs${minify ? '.prod' : ''}.js`),
+      file: path.resolve(
+        info.outDir,
+        `${info.name}.cjs${minify ? '.prod' : ''}.js`,
+      ),
       format: 'cjs',
     }),
     build.write({
-      file: path.resolve(outDir, `${name}.global${minify ? '.prod' : ''}.js`),
+      file: path.resolve(
+        info.outDir,
+        `${info.name}.global${minify ? '.prod' : ''}.js`,
+      ),
       format: 'iife',
       name: 'ToolBoxVue',
       globals: {
@@ -62,4 +68,8 @@ export const bundle = async (minify: boolean) => {
       },
     }),
   ]);
+};
+
+export const runBundle = async () => {
+  await Promise.all([bundle(true), bundle(false), buildType(info)]);
 };
