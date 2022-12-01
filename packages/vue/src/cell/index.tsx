@@ -15,6 +15,7 @@ import ErrorMessage from '../error-message';
 import { TABLE_TOOL_PROVIDE_KEY } from '../tool/tool';
 import { RootSchema, TableToolProvide } from '../tool/type';
 import {
+  ValidateError,
   activeCell,
   editCell,
   editCellEmits,
@@ -29,9 +30,10 @@ export default defineComponent({
   emits: editCellEmits,
 
   setup(props, { slots, expose }) {
-    const { cellArray, rootSchema } = inject<TableToolProvide>(
+    const { cellArray, rootSchema, tableData } = inject<TableToolProvide>(
       TABLE_TOOL_PROVIDE_KEY,
       {
+        tableData: ref([]),
         cellArray: ref([]),
         rootSchema: ref([]),
       },
@@ -39,6 +41,10 @@ export default defineComponent({
     const cellValue = computed(() => {
       if (!props.field || !props.row) return;
       return props.row[props.field];
+    });
+    const rowIndex = computed(() => {
+      if (!tableData.value) return undefined;
+      else return tableData.value.indexOf(props.row);
     });
     const currentInstance = getCurrentInstance();
     const tdElement = ref<HTMLTableCellElement>();
@@ -95,20 +101,28 @@ export default defineComponent({
     };
 
     const validate = async () => {
-      if (schema.schemas.length === 0) return true;
-
+      if (schema.schemas.length === 0) return Promise.resolve();
       errorMessage.value = '';
+
       if (tdElement.value) tdElement.value.style.zIndex = '';
       for (const filedSchema of schema.schemas) {
         try {
           await filedSchema.validate(cellValue.value);
-          return true;
+          return Promise.resolve();
         } catch (e) {
           if (e instanceof ValidationError) {
             errorMessage.value = e.message;
           }
           if (tdElement.value) tdElement.value.style.zIndex = '999';
-          return false;
+
+          return Promise.reject(
+            new ValidateError(
+              props.row,
+              props.field,
+              schema.schemas,
+              rowIndex.value,
+            ),
+          );
         }
       }
     };
@@ -177,8 +191,8 @@ export default defineComponent({
     });
 
     cellArray.value.push({
-      row: props.row,
       validate,
+      row: props.row,
       focus: setFocus,
     });
 

@@ -8,6 +8,7 @@ export type RootSchema = {
 
 export type TableToolProvide = {
   cellArray: Ref<Cell[]>;
+  tableData: Ref<any[] | undefined>;
   rootSchema: Ref<RootSchema>;
 };
 

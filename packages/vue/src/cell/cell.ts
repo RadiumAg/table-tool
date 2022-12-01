@@ -31,3 +31,49 @@ export const otherAreaClick = () => {
   if (!activeCell.value) return;
   activeCell.value = null;
 };
+
+export class ValidateError {
+  /**
+   * 行数据
+   *
+   * @type {object}
+   * @memberof ValidateError
+   */
+  row: object | undefined;
+
+  /**
+   *字段名称
+   *
+   * @type {string}
+   * @memberof ValidateError
+   */
+  field: string | undefined;
+
+  /**
+   * 规则
+   *
+   * @type {*}
+   * @memberof ValidateError
+   */
+  rules: any[];
+
+  /**
+   * 行号
+   *
+   * @type {number}
+   * @memberof ValidateError
+   */
+  rowIndex: number | undefined;
+
+  constructor(
+    row: object | undefined,
+    field: string | undefined,
+    rules: any[],
+    rowIndex: number | undefined,
+  ) {
+    this.field = field;
+    this.row = row;
+    this.rules = rules;
+    this.rowIndex = rowIndex;
+  }
+}

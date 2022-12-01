@@ -5,7 +5,7 @@ export const TABLE_TOOL_PROVIDE_KEY = Symbol();
 
 export const ToolProps = {
   data: {
-    type: Array,
+    type: Array as PropType<any[]>,
     required: true,
   },
   editRules: {
