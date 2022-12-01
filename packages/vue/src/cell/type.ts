@@ -1,14 +1,16 @@
 import { ComponentInternalInstance } from 'vue';
 
+type Validate = () => Promise<void>;
+
 export type Cell = {
   row: unknown;
   focus: () => void;
-  validate: () => Promise<boolean | undefined>;
+  validate: Validate;
 };
 
 export type CellInstance = Omit<ComponentInternalInstance, 'exposed'> & {
   exposed: {
-    validate: () => Promise<boolean>;
     focus: () => void;
+    validate: Validate;
   };
 };

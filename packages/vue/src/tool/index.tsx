@@ -1,11 +1,11 @@
-import { defineComponent, provide, ref, watch } from 'vue';
+import { defineComponent, provide, ref, toRef, watch } from 'vue';
 import {
   RootSchema,
   ValidateCallback,
   getSchema,
   isObject,
 } from '@table-tool/utils';
-import { editCell } from '../cell/cell';
+import { ValidateError, editCell } from '../cell/cell';
 import { Cell } from '../cell/type';
 import { TABLE_TOOL_PROVIDE_KEY, ToolProps } from './tool';
 import { TableToolProvide } from './type';
@@ -17,43 +17,67 @@ export default defineComponent({
     const rootSchema = ref<RootSchema>([]);
 
     const validate = (rows?: any, callback?: ValidateCallback) => {
-      if (!rows) {
+      return Promise.resolve().then(async () => {
         if (!editCell.value) return;
-        return Promise.resolve().then(async () => {
-          if (!editCell.value?.exposed) return;
-          if (!(await editCell.value.exposed.validate())) {
-            editCell.value.exposed.focus();
-            callback && callback();
-          }
-        });
-      } else if (isObject(rows)) {
-        const targetRow = cellArray.value.find(cell => cell.row === rows);
-        if (!targetRow) return;
-        return Promise.resolve().then(async () => {
-          if (!(await targetRow.validate())) {
-            targetRow.focus();
-            callback && callback();
-          }
-        });
-      } else if (Array.isArray(rows)) {
-        return Promise.resolve().then(async () => {
-          for (const row of rows) {
-            const targetRow = cellArray.value.find(cell => cell.row === row);
-            if (!targetRow) return;
-            if (!(await targetRow.validate())) {
-              targetRow.focus();
-              callback && callback();
+        if (!editCell.value?.exposed) return;
 
-              break;
+        const errorMap: Record<string, Array<any>> = {};
+
+        try {
+          await editCell.value.exposed.validate();
+          return;
+        } catch (error) {
+          if (error instanceof ValidateError) {
+            if (!error.field) {
+              console.warn('请设置filed字段，否则无法进行校验');
+              return;
             }
+
+            if (!rows) {
+              // 快速校验
+              if (error) {
+                errorMap[error.field] = [error];
+                editCell.value.exposed.focus();
+                callback && callback(error);
+              }
+            } else if (isObject(rows)) {
+              //选中校验
+              const targetRow = cellArray.value.find(cell => cell.row === rows);
+              if (!targetRow) return;
+              if (error) {
+                errorMap[error.field] = [error];
+                targetRow.focus();
+                callback && callback(error);
+              }
+            } else if (Array.isArray(rows)) {
+              //选中校验
+              for (const row of rows) {
+                const targetRow = cellArray.value.find(
+                  cell => cell.row === row,
+                );
+                if (!targetRow) return;
+                if (error) {
+                  if (!error.field) {
+                    errorMap[error.field] = [];
+                  } else {
+                    errorMap[error.field].push(error);
+                  }
+                  targetRow.focus();
+                  callback && callback(error);
+                  break;
+                }
+              }
+            }
+            return errorMap;
           }
-        });
-      }
+        }
+      });
     };
 
     provide<TableToolProvide>(TABLE_TOOL_PROVIDE_KEY, {
       cellArray,
       rootSchema,
+      tableData: toRef(props, 'data'),
     });
 
     expose({

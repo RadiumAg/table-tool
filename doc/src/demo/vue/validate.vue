@@ -85,8 +85,9 @@ const tableData = ref<UserList>([]);
 const toolRef = ref();
 const selectionRows = ref([]);
 
-const handleValidate = () => {
-  toolRef.value.validate();
+const handleValidate = async () => {
+  const errorMap = await toolRef.value.validate();
+  console.log(errorMap);
 };
 
 const handleSelectionValidate = () => {
