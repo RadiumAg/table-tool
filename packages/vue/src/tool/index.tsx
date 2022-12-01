@@ -1,9 +1,14 @@
 import { defineComponent, provide, ref, toRef, watch } from 'vue';
-import { ValidateCallback, getSchema, isObject } from '@table-tool/utils';
+import {
+  RootSchema,
+  ValidateCallback,
+  getSchema,
+  isObject,
+} from '@table-tool/utils';
 import { ValidateError, editCell } from '../cell/cell';
 import { Cell } from '../cell/type';
 import { TABLE_TOOL_PROVIDE_KEY, ToolProps } from './tool';
-import { RootSchema, TableToolProvide } from './type';
+import { TableToolProvide } from './type';
 
 export default defineComponent({
   props: ToolProps,

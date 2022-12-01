@@ -1,13 +1,14 @@
 {
-  "extends": "../../tsconfig.json",
-  "compilerOptions": {
-    "jsx": "preserve",
-    "jsxFactory": "h",
-    "jsxFragmentFactory": "Fragment",
-    "lib": ["DOM","ESNext"]
-  },
-  "include": [
-    "../../env.d.ts",
-    "src/**/*"
-]
+ "compilerOptions": {
+   "jsx": "preserve",
+   "skipLibCheck": true,
+   "declaration": true,
+   "module": "ESNext",
+   "moduleResolution": "Node",
+   "noImplicitAny": false,
+   "emitDeclarationOnly": true,
+   "declarationDir": "./types"
+ },
+ "exclude": ["node_modules"],
+ "include": ["src/**/*","../../env.d.ts"]
 }

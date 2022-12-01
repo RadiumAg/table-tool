@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "the table-tool's utils",
   "main": "index.js",
+  "module": "dist/table-tool-utils.esm.js",
+  "types": "dist/table-tool-utils.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:utils":"pnpm run build:types && esno ../../script/build --type=utils",
+    "build:types": "tsc --skipLibCheck --declaration --emitDeclarationOnly "
   },
   "keywords": [],
   "author": "",

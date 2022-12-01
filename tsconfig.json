@@ -6,14 +6,22 @@
     ],
     "target": "ESNext",
     "module": "ESNext",
-    "composite": true,
     "moduleResolution": "Node",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "declaration": true,
     "skipLibCheck": true,
     "baseUrl": ".",
-    "noImplicitAny": false
-  }
+    "noImplicitAny": false,
+    "paths": {
+      "@table-tool/*": [
+        "packages/*/src"
+      ],
+      "@demo/vue": [
+        "doc/src/demo/vue/index.ts"
+      ]
+    }
+  },
+  "exclude": ["node_modules"],
+  "include": ["doc/**/*","doc/.vitepress/**/*"]
 }

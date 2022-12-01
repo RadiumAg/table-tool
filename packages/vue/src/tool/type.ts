@@ -1,10 +1,6 @@
 import { Ref } from 'vue';
-import { Cell, ValidateRule } from './../cell/type';
-
-export type RootSchema = {
-  field: string;
-  schemas: any[];
-}[];
+import { RootSchema, ValidateRule } from '@table-tool/utils';
+import { Cell } from './../cell/type';
 
 export type TableToolProvide = {
   cellArray: Ref<Cell[]>;
