@@ -1,5 +1,5 @@
 {
-  "name": "@table-tool/utils",
+  "name": "table-tool-utils",
   "version": "1.0.0",
   "description": "the table-tool's utils",
   "main": "index.js",
