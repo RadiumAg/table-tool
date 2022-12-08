@@ -1,6 +1,6 @@
 import { PropType, ref } from 'vue';
 import { ValidateRule } from '@table-tool/utils';
-import { CellInstance } from './type';
+import { CellInstance, Rule } from './type';
 
 export const editCellProps = {
   row: {
@@ -51,12 +51,12 @@ export class ValidateError {
   field: string | undefined;
 
   /**
-   * 规则
+   * 校验规则和信息
    *
-   * @type {*}
+   * @type {Rule}
    * @memberof ValidateError
    */
-  rules: any[];
+  rule: Rule;
 
   /**
    * 行号
@@ -69,12 +69,12 @@ export class ValidateError {
   constructor(
     row: object | undefined,
     field: string | undefined,
-    rules: any[],
+    rule: Rule,
     rowIndex: number | undefined,
   ) {
-    this.field = field;
     this.row = row;
-    this.rules = rules;
+    this.field = field;
+    this.rule = rule;
     this.rowIndex = rowIndex;
   }
 }

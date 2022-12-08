@@ -10,16 +10,7 @@ declare const _default: import("vue").DefineComponent<{
         }>;
     };
     editRules: {
-        type: import("vue").PropType<Partial<{
-            required: boolean;
-            min: number;
-            max: number;
-            type: "string" | "number" | "array" | "date";
-            pattern: string | RegExp;
-            validator: import("@table-tool/utils").ValidatorFunction;
-            message: string;
-            trigger: "blur" | "change";
-        }>[]>;
+        type: import("vue").PropType<ValidateRule[]>;
     };
     field: {
         type: StringConstructor;
@@ -37,16 +28,7 @@ declare const _default: import("vue").DefineComponent<{
         }>;
     };
     editRules: {
-        type: import("vue").PropType<Partial<{
-            required: boolean;
-            min: number;
-            max: number;
-            type: "string" | "number" | "array" | "date";
-            pattern: string | RegExp;
-            validator: import("@table-tool/utils").ValidatorFunction;
-            message: string;
-            trigger: "blur" | "change";
-        }>[]>;
+        type: import("vue").PropType<ValidateRule[]>;
     };
     field: {
         type: StringConstructor;
