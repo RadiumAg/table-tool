@@ -5,11 +5,15 @@
   "main": "index.js",
   "module": "dist/table-tool-utils.esm.js",
   "types": "dist/table-tool-utils.d.ts",
+  "files": [
+    "index.js",
+    "dist"
+  ],
   "scripts": {
     "build:utils":"pnpm run build:types && esno ../../script/build --type=utils",
     "build:types": "tsc --skipLibCheck --declaration --emitDeclarationOnly "
   },
-  "keywords": [],
+  "keywords": ["table-tool"],
   "author": "",
   "license": "ISC",
   "dependencies": {
