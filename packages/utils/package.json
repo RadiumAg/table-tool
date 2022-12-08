@@ -14,7 +14,7 @@
     "build:types": "tsc --skipLibCheck --declaration --emitDeclarationOnly "
   },
   "keywords": ["table-tool"],
-  "author": "Radium",
+  "author": "raag",
   "license": "ISC",
   "dependencies": {
     "yup": "^0.32.11"
