@@ -1,3 +1,4 @@
+import { ValidateRule } from '@table-tool/utils';
 import { ComponentInternalInstance } from 'vue';
 
 type Validate = () => Promise<void>;
@@ -14,3 +15,5 @@ export type CellInstance = Omit<ComponentInternalInstance, 'exposed'> & {
     validate: Validate;
   };
 };
+
+export type Rule = ValidateRule & { message: string };

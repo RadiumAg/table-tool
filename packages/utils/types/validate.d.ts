@@ -1,7 +1,10 @@
 declare type Trigger = 'blur' | 'change';
 export declare type RootSchema = {
     field: string;
-    schemas: any[];
+    schemas: {
+        value: any;
+        rule: ValidateRule;
+    }[];
 }[];
 export declare type ValidatorFunction = (value: unknown) => Error | Promise<any>;
 export declare type ValidateRule = Partial<{
@@ -56,6 +59,9 @@ export declare type ValidateRule = Partial<{
 }>;
 export declare const getSchema: (field: string, rules: ValidateRule[]) => {
     field: string;
-    schemas: any[];
+    schemas: {
+        value: any;
+        rule: ValidateRule;
+    }[];
 };
 export {};

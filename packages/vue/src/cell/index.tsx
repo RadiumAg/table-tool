@@ -50,7 +50,7 @@ export default defineComponent({
     const tdElement = ref<HTMLTableCellElement>();
     const errorMessage = ref('');
     const containerRef = ref<HTMLDivElement>();
-    const schema: RootSchema[number] = { field: '', schemas: [] };
+    const schema: RootSchema[number] = { field: '', schemas: [], rule: null };
 
     const isFocus = computed(() => {
       return activeCell.value === containerRef.value;
@@ -107,7 +107,7 @@ export default defineComponent({
       if (tdElement.value) tdElement.value.style.zIndex = '';
       for (const filedSchema of schema.schemas) {
         try {
-          await filedSchema.validate(cellValue.value);
+          await filedSchema.value.validate(cellValue.value);
           return Promise.resolve();
         } catch (e) {
           if (e instanceof ValidationError) {
@@ -119,7 +119,10 @@ export default defineComponent({
             new ValidateError(
               props.row,
               props.field,
-              schema.schemas,
+              {
+                ...filedSchema.rule,
+                message: errorMessage.value,
+              },
               rowIndex.value,
             ),
           );

@@ -4,7 +4,7 @@ type Trigger = 'blur' | 'change';
 
 export type RootSchema = {
   field: string;
-  schemas: any[];
+  schemas: { value: any; rule: ValidateRule }[];
 }[];
 
 export type ValidatorFunction = (value: unknown) => Error | Promise<any>;
@@ -83,7 +83,7 @@ export const getSchema = (field: string, rules: ValidateRule[]) => {
         } else validateRule = validateRule[key](rule[key], rule.message);
       });
 
-    ruleMap.schemas.push(validateRule as any);
+    ruleMap.schemas.push({ value: validateRule, rule });
   }
 
   return ruleMap;
