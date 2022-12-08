@@ -50,7 +50,7 @@ export default defineComponent({
     const tdElement = ref<HTMLTableCellElement>();
     const errorMessage = ref('');
     const containerRef = ref<HTMLDivElement>();
-    const schema: RootSchema[number] = { field: '', schemas: [], rule: null };
+    const schema: RootSchema[number] = { field: '', schemas: [] };
 
     const isFocus = computed(() => {
       return activeCell.value === containerRef.value;

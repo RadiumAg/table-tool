@@ -88,10 +88,9 @@ export default defineComponent({
       () => props.editRules,
       () => {
         // eslint-disable-next-line no-restricted-syntax
-        for (const field in rootSchema.value) {
-          const rule = rootSchema.value[field];
-          const schema = getSchema(rule.field, rule.schemas);
-          rule.schemas.push(schema.schemas);
+        for (const field in props.editRules) {
+          const newRules = props.editRules[field];
+          rootSchema[field] = getSchema(field, newRules);
         }
       },
       { immediate: true },
