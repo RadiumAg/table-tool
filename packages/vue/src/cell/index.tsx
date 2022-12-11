@@ -10,7 +10,7 @@ import {
   watch,
 } from 'vue';
 import { ValidationError } from 'yup';
-import { RootSchema, getSchema } from '@table-tool/utils';
+import { RootSchema, getSchema } from 'table-tool-utils';
 import ErrorMessage from '../error-message';
 import { TABLE_TOOL_PROVIDE_KEY } from '../tool/tool';
 import { TableToolProvide } from '../tool/type';
@@ -20,7 +20,6 @@ import {
   editCell,
   editCellEmits,
   editCellProps,
-  otherAreaClick,
 } from './cell';
 import Style from './index.module.scss';
 import { CellInstance } from './type';
@@ -50,11 +49,9 @@ export default defineComponent({
     const tdElement = ref<HTMLTableCellElement>();
     const errorMessage = ref('');
     const containerRef = ref<HTMLDivElement>();
-    const schema: RootSchema[number] = { field: '', schemas: [], rule: null };
+    const schema = ref<RootSchema[number]>({ field: '', schemas: [] });
 
-    const isFocus = computed(() => {
-      return activeCell.value === containerRef.value;
-    });
+    const isFocus = ref(false);
 
     const content = computed(() => {
       if (isFocus.value) {
@@ -101,11 +98,18 @@ export default defineComponent({
     };
 
     const validate = async () => {
-      if (schema.schemas.length === 0) return Promise.resolve();
+      if (rootSchema.value.length > 0) {
+        schema.value = rootSchema.value.find(_ => _.field === props.field) || {
+          field: props.field,
+          schemas: [],
+        };
+      }
+
+      if (schema.value.schemas.length === 0) return Promise.resolve();
       errorMessage.value = '';
 
       if (tdElement.value) tdElement.value.style.zIndex = '';
-      for (const filedSchema of schema.schemas) {
+      for (const filedSchema of schema.value.schemas) {
         try {
           await filedSchema.value.validate(cellValue.value);
           return Promise.resolve();
@@ -149,22 +153,22 @@ export default defineComponent({
       }
     };
 
-    onMounted(() => {
-      document.removeEventListener('mousedown', otherAreaClick);
-      document.addEventListener('mousedown', otherAreaClick);
-
-      setTdStyle();
-    });
-
-    watch(isFocus, () => {
-      if (!isFocus.value) return;
-      setAutofocus();
-      setAutoselect();
-    });
+    watch(
+      isFocus,
+      () => {
+        if (!isFocus.value) return;
+        setAutofocus();
+        setAutoselect();
+      },
+      {
+        immediate: false,
+      },
+    );
 
     watch(
       () => props.editRules,
       () => {
+        if (schema.value.field || schema.value.schemas.length > 0) return;
         if (!props.editRules) {
           return;
         }
@@ -174,9 +178,10 @@ export default defineComponent({
           return;
         }
         const { field, schemas } = getSchema(props.field, props.editRules);
-        schema.schemas = schemas;
-        schema.field = field;
-        rootSchema.value.push(schema);
+        schema.value.schemas = schemas;
+        schema.value.field = field;
+
+        rootSchema.value.push(schema.value);
       },
       { immediate: true },
     );
@@ -193,6 +198,10 @@ export default defineComponent({
       }
     });
 
+    watch(activeCell, () => {
+      isFocus.value = activeCell.value === containerRef.value;
+    });
+
     cellArray.value.push({
       validate,
       row: props.row,
@@ -202,6 +211,10 @@ export default defineComponent({
     expose({
       validate,
       focus: setFocus,
+    });
+
+    onMounted(() => {
+      setTdStyle();
     });
 
     return () => {

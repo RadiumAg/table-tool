@@ -6,8 +6,8 @@ import esbuild from 'rollup-plugin-esbuild';
 import { InputPluginOption, rollup } from 'rollup';
 import { buildType, getInfo } from './common';
 
-const info = getInfo('@table-tool/vue');
-export const external = ['yup', '@table-tool/utils', 'vue'];
+const info = getInfo('table-tool-vue');
+export const external = ['yup', 'table-tool-utils', 'vue'];
 
 export const getPlugins = (minify: boolean) => {
   if (!info) return;

@@ -3,7 +3,7 @@ import esbuild from 'rollup-plugin-esbuild';
 import { InputPluginOption, rollup } from 'rollup';
 import { buildType, getInfo } from './common';
 
-const info = getInfo('@table-tool/utils');
+const info = getInfo('table-tool-utils');
 export const external = ['yup', 'vue'];
 
 export const getPlugins = (minify: boolean) => {

@@ -4,7 +4,7 @@
     <el-button @click="handleSelectionValidate">选中行校验</el-button>
   </div>
 
-  <tool ref="toolRef" :data="tableData">
+  <tool ref="toolRef" :data="tableData" :edit-rules="editRule">
     <el-table
       border
       height="400"
@@ -22,11 +22,7 @@
         show-overflow-tooltip
       >
         <template #default="{ row }">
-          <edit-cell
-            :row="row"
-            field="name"
-            :edit-rules="[{ required: true, message: '名称必填' }]"
-          >
+          <edit-cell :row="row" field="name">
             <el-input v-model="row.name"></el-input>
           </edit-cell>
         </template>
@@ -79,11 +75,16 @@
 import { ElButton, ElInput, ElTable, ElTableColumn } from 'element-plus';
 import { ref } from 'vue';
 import { Cell as EditCell, Tool } from 'table-tool-vue';
+import { ValidateRule } from 'table-tool-utils';
 import { UserList, useData } from '../../utils/data';
 
 const tableData = ref<UserList>([]);
 const toolRef = ref();
 const selectionRows = ref([]);
+const editRule: Record<string, ValidateRule[]> = {
+  name: [{ required: true, message: '请填写名称' }],
+  email: [{ matches: /.+\..+$/, message: '格式不正确' }],
+};
 
 const handleValidate = async () => {
   const errorMap = await toolRef.value.validate();

@@ -10,7 +10,7 @@
 
 ```typescript
 ...
-import { Cell } from '@table-tool/vue'
+import { Cell } from 'table-tool-vue'
 ...
  <el-table-column
       prop="name"
@@ -39,7 +39,7 @@ import { Cell } from '@table-tool/vue'
 
 ```typescript
 ...
-import { Cell, Tool } from '@table-tool/vue'
+import { Cell, Tool } from 'table-tool-vue'
 
 <template> 
 <tool>

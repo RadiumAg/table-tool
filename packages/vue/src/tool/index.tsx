@@ -1,11 +1,11 @@
-import { defineComponent, provide, ref, toRef, watch } from 'vue';
+import { defineComponent, onMounted, provide, ref, toRef, watch } from 'vue';
 import {
   RootSchema,
   ValidateCallback,
   getSchema,
   isObject,
-} from '@table-tool/utils';
-import { ValidateError, editCell } from '../cell/cell';
+} from 'table-tool-utils';
+import { ValidateError, editCell, otherAreaClick } from '../cell/cell';
 import { Cell } from '../cell/type';
 import { TABLE_TOOL_PROVIDE_KEY, ToolProps } from './tool';
 import { TableToolProvide } from './type';
@@ -57,7 +57,7 @@ export default defineComponent({
                 );
                 if (!targetRow) return;
                 if (error) {
-                  if (!error.field) {
+                  if (!errorMap[error.field]) {
                     errorMap[error.field] = [];
                   } else {
                     errorMap[error.field].push(error);
@@ -87,15 +87,26 @@ export default defineComponent({
     watch(
       () => props.editRules,
       () => {
-        // eslint-disable-next-line no-restricted-syntax
-        for (const field in rootSchema.value) {
-          const rule = rootSchema.value[field];
-          const schema = getSchema(rule.field, rule.schemas);
-          rule.schemas.push(schema.schemas);
+        for (const field in props.editRules) {
+          const newRules = props.editRules[field];
+          const newSchemas = getSchema(field, newRules);
+          const currentSchema = rootSchema.value.find(
+            schema => schema.field === field,
+          );
+          if (currentSchema) {
+            currentSchema.schemas = newSchemas.schemas;
+          } else {
+            rootSchema.value.push(newSchemas);
+          }
         }
       },
       { immediate: true },
     );
+
+    onMounted(() => {
+      document.removeEventListener('mousedown', otherAreaClick);
+      document.addEventListener('mousedown', otherAreaClick);
+    });
 
     return () => {
       return <div>{{ ...slots }}</div>;
