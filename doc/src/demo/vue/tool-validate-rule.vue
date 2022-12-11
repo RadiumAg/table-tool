@@ -83,7 +83,7 @@ const toolRef = ref();
 const selectionRows = ref([]);
 const editRule: Record<string, ValidateRule[]> = {
   name: [{ required: true, message: '请填写名称' }],
-  email: [{ matches: /.+com$/, message: '格式不正确' }],
+  email: [{ matches: /.+\..+$/, message: '格式不正确' }],
 };
 
 const handleValidate = async () => {
