@@ -1,4 +1,4 @@
-import { ValidateRule } from '@table-tool/utils';
+import { ValidateRule } from 'table-tool-utils';
 import { ComponentInternalInstance } from 'vue';
 
 type Validate = () => Promise<void>;

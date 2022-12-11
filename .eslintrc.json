@@ -1,3 +1,6 @@
 {
-  "extends": "@raag/eslint-config-vue"
+  "extends": "@raag/eslint-config-vue",
+  "rules": {
+    "no-restricted-syntax": "off"
+  }
 }

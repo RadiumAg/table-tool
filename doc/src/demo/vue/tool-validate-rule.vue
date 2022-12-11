@@ -1,19 +1,10 @@
-<script setup>
-import Validate from '@demo/vue/validate.vue'
-import ToolValidate from '@demo/vue/tool-validate-rule.vue'
-</script>
-
-
-### 基本使用
-<Validate/>
-
-```typescript
- <div class="button-group">
+<template>
+  <div class="button-group">
     <el-button @click="handleValidate">快速校验</el-button>
     <el-button @click="handleSelectionValidate">选中行校验</el-button>
   </div>
 
-  <tool ref="toolRef" :data="tableData">
+  <tool ref="toolRef" :data="tableData" :edit-rules="editRule">
     <el-table
       border
       height="400"
@@ -31,11 +22,7 @@ import ToolValidate from '@demo/vue/tool-validate-rule.vue'
         show-overflow-tooltip
       >
         <template #default="{ row }">
-          <edit-cell
-            :row="row"
-            field="name"
-            :edit-rules="[{ required: true, message: '名称必填' }]"
-          >
+          <edit-cell :row="row" field="name">
             <el-input v-model="row.name"></el-input>
           </edit-cell>
         </template>
@@ -82,8 +69,42 @@ import ToolValidate from '@demo/vue/tool-validate-rule.vue'
       </el-table-column>
     </el-table>
   </tool>
-```
+</template>
 
+<script lang="ts" setup>
+import { ElButton, ElInput, ElTable, ElTableColumn } from 'element-plus';
+import { ref } from 'vue';
+import { Cell as EditCell, Tool } from 'table-tool-vue';
+import { ValidateRule } from 'table-tool-utils';
+import { UserList, useData } from '../../utils/data';
 
-## 使用Tool的`editRules`属性进行设置
-<ToolValidate/>
+const tableData = ref<UserList>([]);
+const toolRef = ref();
+const selectionRows = ref([]);
+const editRule: Record<string, ValidateRule[]> = {
+  name: [{ required: true, message: '请填写名称' }],
+  email: [{ matches: /.+com$/, message: '格式不正确' }],
+};
+
+const handleValidate = async () => {
+  const errorMap = await toolRef.value.validate();
+  console.log(errorMap);
+};
+
+const handleSelectionValidate = () => {
+  toolRef.value.validate(selectionRows.value);
+};
+
+const handleSelectionChange = (selection: []) => {
+  selectionRows.value = selection;
+};
+
+useData(100, tableData);
+</script>
+
+<style lang="scss" scoped>
+.button-group {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+</style>

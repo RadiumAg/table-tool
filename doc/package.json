@@ -22,9 +22,8 @@
   },
   "dependencies": {
     "@algolia/client-search": ">= 4.9.1 < 6",
-    "@table-tool/react": "workspace:*",
-    "@table-tool/vue": "workspace:*",
-    "@table-tool/utils": "workspace:*",
+    "table-tool-vue": "workspace:*",
+    "table-tool-utils": "workspace:*",
     "@types/mockjs": "^1.0.7",
     "@vue/theme": "^1.2.2",
     "element-plus": "^2.2.21",

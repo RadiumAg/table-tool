@@ -4,24 +4,14 @@
       "DOM",
       "ESNext"
     ],
+    "strict": true,
     "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "Node",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
     "skipLibCheck": true,
-    "baseUrl": ".",
     "noImplicitAny": false,
-    "paths": {
-      "@table-tool/*": [
-        "packages/*/src"
-      ],
-      "@demo/vue": [
-        "doc/src/demo/vue/index.ts"
-      ]
-    }
+    "esModuleInterop": true,
+    "moduleResolution": "Node",
+    "forceConsistentCasingInFileNames": true
   },
-  "exclude": ["node_modules"],
-  "include": ["doc/**/*","doc/.vitepress/**/*"]
+  "exclude": ["node_modules"]
 }

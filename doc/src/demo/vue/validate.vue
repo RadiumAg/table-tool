@@ -78,7 +78,7 @@
 <script lang="ts" setup>
 import { ElButton, ElInput, ElTable, ElTableColumn } from 'element-plus';
 import { ref } from 'vue';
-import { Cell as EditCell, Tool } from '@table-tool/vue';
+import { Cell as EditCell, Tool } from 'table-tool-vue';
 import { UserList, useData } from '../../utils/data';
 
 const tableData = ref<UserList>([]);
