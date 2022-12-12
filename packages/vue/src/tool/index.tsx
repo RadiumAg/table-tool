@@ -29,7 +29,7 @@ export default defineComponent({
         } catch (error) {
           if (error instanceof ValidateError) {
             if (!error.field) {
-              console.warn('请设置filed字段，否则无法进行校验');
+              console.warn('请设置field字段，否则无法进行校验');
               return;
             }
 
@@ -42,27 +42,30 @@ export default defineComponent({
               }
             } else if (isObject(rows)) {
               //选中校验
-              const targetRow = cellArray.value.find(cell => cell.row === rows);
-              if (!targetRow) return;
+              const targetCell = cellArray.value
+                .filter(_ => _.row === rows)
+                .find(cell => cell.field === error.field);
+              if (!targetCell) return;
               if (error) {
                 errorMap[error.field] = [error];
-                targetRow.focus();
+                targetCell.focus();
                 callback && callback(error);
               }
             } else if (Array.isArray(rows)) {
               //选中校验
               for (const row of rows) {
-                const targetRow = cellArray.value.find(
-                  cell => cell.row === row,
-                );
-                if (!targetRow) return;
+                const targetCell = cellArray.value
+                  .filter(_ => _.row === row)
+                  .find(cell => cell.field === error.field);
+
+                if (!targetCell) return;
                 if (error) {
                   if (!errorMap[error.field]) {
                     errorMap[error.field] = [];
                   } else {
                     errorMap[error.field].push(error);
                   }
-                  targetRow.focus();
+                  targetCell.focus();
                   callback && callback(error);
                   break;
                 }

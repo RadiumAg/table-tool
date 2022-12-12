@@ -63,7 +63,6 @@ export default defineComponent({
 
     const setFocus = () => {
       if (activeCell.value === containerRef.value) return;
-
       activeCell.value = containerRef.value;
     };
 
@@ -107,9 +106,9 @@ export default defineComponent({
       errorMessage.value = '';
 
       if (tdElement.value) tdElement.value.style.zIndex = '';
-      for (const filedSchema of schema.value.schemas) {
+      for (const fieldSchema of schema.value.schemas) {
         try {
-          await filedSchema.value.validate(cellValue.value);
+          await fieldSchema.value.validate(cellValue.value);
           return Promise.resolve();
         } catch (e) {
           if (e instanceof ValidationError) {
@@ -122,7 +121,7 @@ export default defineComponent({
               props.row,
               props.field,
               {
-                ...filedSchema.rule,
+                ...fieldSchema.rule,
                 message: errorMessage.value,
               },
               rowIndex.value,
@@ -172,7 +171,7 @@ export default defineComponent({
         }
 
         if (!props.field) {
-          console.warn('请设置filed');
+          console.warn('请设置field');
           return;
         }
         const { field, schemas } = getSchema(props.field, props.editRules);
@@ -204,6 +203,7 @@ export default defineComponent({
       validate,
       row: props.row,
       focus: setFocus,
+      field: props.field,
     });
 
     expose({

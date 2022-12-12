@@ -5,6 +5,7 @@ type Validate = () => Promise<void>;
 
 export type Cell = {
   row: unknown;
+  field: string;
   focus: () => void;
   validate: Validate;
 };
