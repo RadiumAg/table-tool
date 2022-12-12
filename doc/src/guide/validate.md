@@ -85,7 +85,7 @@ import ToolValidate from '@demo/vue/tool-validate-rule.vue'
 ```
 
 
-## 使用Tool的`editRules`属性进行设置
+## 使用`Tool`的`editRules`属性进行设置
 <ToolValidate/>
 
 ```typescript

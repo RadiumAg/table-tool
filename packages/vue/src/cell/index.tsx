@@ -218,7 +218,7 @@ export default defineComponent({
     return () => {
       return (
         <div
-          class="table-tool-edit-cell"
+          class="table-tool-cell"
           ref={containerRef}
           onMousedown={event => {
             event.stopPropagation();
@@ -233,7 +233,7 @@ export default defineComponent({
             </Teleport>
           )}
 
-          {!isFocus.value && <div class="table-tool-edit-cell__mask"></div>}
+          {!isFocus.value && <div class="table-tool-cell__mask"></div>}
         </div>
       );
     };

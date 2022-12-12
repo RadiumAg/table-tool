@@ -1,7 +1,7 @@
 {
   "name": "table-tool-theme-chalk",
   "version": "1.0.0",
-  "description": "",
+  "description": "table tool theme chalk",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

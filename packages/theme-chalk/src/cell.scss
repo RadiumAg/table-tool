@@ -2,7 +2,7 @@
 
 @use "./mixins/mixins.scss" as *;
 
-@include b(edit-cell) {
+@include b(cell) {
   will-change: width;
   overflow: hidden;
   text-overflow: ellipsis;
