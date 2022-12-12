@@ -14,7 +14,7 @@
     "build:types":"vue-tsc"
   },
   "keywords": ["table-tool"],
-  "author": "raag",
+  "author": "Radium",
   "license": "ISC",
   "peerDependencies": {
     "vue": "^3.0.0"

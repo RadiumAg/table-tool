@@ -2,7 +2,6 @@
   "name": "table-tool",
   "version": "1.0.0",
   "description": "",
-  "homepage": "https://[username].github.io/tool-box",
   "main": "index.js",
   "scripts": {
     "build": "pnpm run -C ./packages/vue build:vue && pnpm run -C ./packages/utils build:utils",
