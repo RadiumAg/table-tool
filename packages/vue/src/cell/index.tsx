@@ -50,7 +50,6 @@ export default defineComponent({
     const errorMessage = ref('');
     const containerRef = ref<HTMLDivElement>();
     const schema = ref<RootSchema[number]>({ field: '', schemas: [] });
-
     const isFocus = ref(false);
 
     const content = computed(() => {

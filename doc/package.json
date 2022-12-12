@@ -8,9 +8,10 @@
     "docs:build": "vitepress build",
     "docs:serve": "vitepress serve"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["table-tool"],
+  "author": "Radium",
   "license": "ISC",
+  "homepage": "https://[username].github.io/tool-box",
   "devDependencies": {
     "@types/node": "^18.11.9",
     "@vitejs/plugin-vue": "^3.2.0",
