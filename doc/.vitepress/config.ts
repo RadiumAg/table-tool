@@ -78,9 +78,7 @@ export default defineConfigWithTheme<ThemeConfig>({
       },
     },
     css: {
-      modules: {
-        localsConvention: 'camelCase',
-      },
+      preprocessorOptions: {},
     },
   },
 });

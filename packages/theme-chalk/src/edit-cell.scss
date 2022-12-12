@@ -1,0 +1,17 @@
+/** @format */
+
+@use "./mixins/mixins.scss" as *;
+
+@include b(edit-cell) {
+  will-change: width;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @include e(mask) {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  }
+}

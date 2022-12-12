@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "doc": "workspace:*",
+    "table-tool-theme-chalk": "workspace:*",
     "table-tool-utils": "workspace:*",
     "table-tool-vue": "workspace:*"
   }
