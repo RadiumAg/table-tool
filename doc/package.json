@@ -25,6 +25,7 @@
     "@algolia/client-search": ">= 4.9.1 < 6",
     "table-tool-vue": "workspace:*",
     "table-tool-utils": "workspace:*",
+    "table-tool-theme-chalk": "workspace:*",
     "@types/mockjs": "^1.0.7",
     "@vue/theme": "^1.2.2",
     "element-plus": "^2.2.21",

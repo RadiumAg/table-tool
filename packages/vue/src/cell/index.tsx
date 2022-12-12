@@ -21,7 +21,6 @@ import {
   editCellEmits,
   editCellProps,
 } from './cell';
-import Style from './index.module.scss';
 import { CellInstance } from './type';
 
 export default defineComponent({
@@ -219,7 +218,7 @@ export default defineComponent({
     return () => {
       return (
         <div
-          class={Style.editCell}
+          class="table-tool-edit-cell"
           ref={containerRef}
           onMousedown={event => {
             event.stopPropagation();
@@ -234,7 +233,7 @@ export default defineComponent({
             </Teleport>
           )}
 
-          {!isFocus.value && <div class={Style.mask}></div>}
+          {!isFocus.value && <div class="table-tool-edit-cell__mask"></div>}
         </div>
       );
     };
