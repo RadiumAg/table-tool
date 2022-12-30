@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "pnpm run -C ./packages/vue build:vue && pnpm run -C ./packages/utils build:utils",
+    "build": "pnpm run -C ./packages/vue build:vue && pnpm run -C ./packages/utils build:utils && pnpm run -C ./packages/theme-chalk build:theme-chalk",
     "clear-node_module": "rimraf node_modules"
   },
   "keywords": [],

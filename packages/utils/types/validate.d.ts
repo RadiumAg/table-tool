@@ -37,7 +37,7 @@ export declare type ValidateRule = Partial<{
      *
      * @type {(RegExp | string)}
      */
-    pattern: RegExp | string;
+    matches: RegExp | string;
     /**
      * 自定义校验方法，返回一个 Error 或者 Promise<new Error("提示消息")>
      *

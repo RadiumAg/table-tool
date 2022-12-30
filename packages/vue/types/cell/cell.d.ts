@@ -12,7 +12,16 @@ export declare const editCellProps: {
         }>;
     };
     editRules: {
-        type: PropType<ValidateRule[]>;
+        type: PropType<Partial<{
+            required: boolean;
+            min: number;
+            max: number;
+            type: "string" | "number" | "array" | "date";
+            matches: string | RegExp;
+            validator: import("table-tool-utils").ValidatorFunction;
+            message: string;
+            trigger: "blur" | "change";
+        }>[]>;
     };
     field: {
         type: StringConstructor;
@@ -39,13 +48,6 @@ export declare class ValidateError {
      */
     field: string | undefined;
     /**
-     * 所有校验规则
-     *
-     * @type {*}
-     * @memberof ValidateError
-     */
-    rules: Rule[];
-    /**
      * 校验规则和信息
      *
      * @type {Rule}
@@ -59,5 +61,5 @@ export declare class ValidateError {
      * @memberof ValidateError
      */
     rowIndex: number | undefined;
-    constructor(row: object | undefined, field: string | undefined, rules: Rule[], rule: Rule, rowIndex: number | undefined);
+    constructor(row: object | undefined, field: string | undefined, rule: Rule, rowIndex: number | undefined);
 }
