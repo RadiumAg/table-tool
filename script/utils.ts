@@ -11,8 +11,9 @@ export const getPlugins = (minify: boolean) => {
 
   return [
     esbuild({
-      target: 'esnext',
       minify,
+      target: 'esnext',
+      sourceMap: true,
     }),
   ] as InputPluginOption[];
 };
@@ -34,30 +35,18 @@ const bundle = async (minify: boolean) => {
 
   Promise.all([
     build.write({
-      file: path.resolve(
-        info.outDir,
-        `${info.name}.esm${minify ? '.prod' : ''}.js`,
-      ),
+      sourcemap: true,
+      dir: path.resolve(info.outDir, './esm'),
       format: 'esm',
+      preserveModules: true,
+      preserveModulesRoot: path.resolve(__dirname, '../packages'),
     }),
     build.write({
-      file: path.resolve(
-        info.outDir,
-        `${info.name}.cjs${minify ? '.prod' : ''}.js`,
-      ),
+      sourcemap: true,
+      dir: path.resolve(info.outDir, './lib'),
       format: 'cjs',
-    }),
-    build.write({
-      file: path.resolve(
-        info.outDir,
-        `${info.name}.global${minify ? '.prod' : ''}.js`,
-      ),
-      format: 'iife',
-      name: 'ToolBoxUtils',
-      globals: {
-        vue: 'vue',
-        yup: 'yup',
-      },
+      preserveModules: true,
+      preserveModulesRoot: path.resolve(__dirname, '../packages'),
     }),
   ]);
 };

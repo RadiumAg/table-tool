@@ -1,75 +1,94 @@
 import path from 'path';
 import vueJsx from '@vitejs/plugin-vue-jsx';
-import dts from 'rollup-plugin-dts';
+import vue from '@vitejs/plugin-vue';
 import postcss from 'rollup-plugin-postcss';
 import esbuild from 'rollup-plugin-esbuild';
 import { InputPluginOption, rollup } from 'rollup';
-import { buildType, getInfo } from './common';
+import { getInfo } from './common';
 
 const info = getInfo('table-tool-vue');
-export const external = ['yup', 'table-tool-utils', 'vue'];
 
 export const getPlugins = (minify: boolean) => {
   if (!info) return;
 
   return [
+    vue({ isProduction: true }),
     vueJsx(),
     esbuild({
+      sourceMap: minify,
       target: 'esnext',
+      loaders: {
+        '.vue': 'ts',
+      },
       minify,
     }),
     postcss({
       minimize: minify,
       modules: true,
+      sourceMap: true,
     }),
   ] as InputPluginOption[];
 };
 
-const bundle = async (minify: boolean) => {
+const buildFullBundle = async (minify: boolean) => {
   if (!info) return;
 
   const build = await rollup({
     plugins: getPlugins(minify),
     input: [info.inputfile],
-    external,
-    output: {
-      globals: {
-        vue: 'vue',
-        yup: 'yup',
-      },
-    },
+    external: ['vue', 'yup', 'table-tool-utils'],
   });
 
-  Promise.all([
+  await Promise.all([
     build.write({
       file: path.resolve(
         info.outDir,
-        `${info.name}.esm${minify ? '.prod' : ''}.js`,
+        './dist',
+        `index.full.${minify ? 'min' : ''}.js`,
       ),
-      format: 'esm',
-    }),
-    build.write({
-      file: path.resolve(
-        info.outDir,
-        `${info.name}.cjs${minify ? '.prod' : ''}.js`,
-      ),
-      format: 'cjs',
-    }),
-    build.write({
-      file: path.resolve(
-        info.outDir,
-        `${info.name}.global${minify ? '.prod' : ''}.js`,
-      ),
-      format: 'iife',
-      name: 'ToolBoxVue',
+      format: 'umd',
+      name: 'TableTool',
+      sourcemap: minify,
       globals: {
-        vue: 'vue',
         yup: 'yup',
+        vue: 'vue',
+        'table-tool-utils': 'table-tool-utils',
       },
     }),
   ]);
 };
 
+const buildBundle = async () => {
+  if (!info) return;
+
+  const build = await rollup({
+    plugins: getPlugins(false),
+    input: [info.inputfile],
+    external: ['vue', 'yup', 'table-tool-utils'],
+  });
+
+  await Promise.all([
+    build.write({
+      sourcemap: true,
+      format: 'esm',
+      dir: path.resolve(info.outDir, './esm'),
+      preserveModules: true,
+      preserveModulesRoot: path.resolve(__dirname, '../packages'),
+    }),
+    build.write({
+      sourcemap: true,
+      format: 'cjs',
+      dir: path.resolve(info.outDir, './lib'),
+      preserveModules: true,
+      preserveModulesRoot: path.resolve(__dirname, '../packages'),
+    }),
+  ]);
+};
+
 export const runBundle = async () => {
-  await Promise.all([bundle(true), bundle(false), buildType(info)]);
+  await Promise.all([
+    buildFullBundle(true),
+    buildFullBundle(false),
+    buildBundle(),
+  ]);
 };
