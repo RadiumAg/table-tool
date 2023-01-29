@@ -1,12 +1,18 @@
 {
   "name": "table-tool",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "description": "表格增强工具",
+  "main": "lib/vue/index.js",
+  "module": "esm/vue/index.js",
+  "types": "esm/vue/index.d.ts",
+  "keywords": [
+    "table-tool",
+    "vue"
+  ],
+  "author": "Radium",
+  "license": "ISC",
+  "devDependencies": {
+    "vue": "^3.2.44",
+    "yup": "^0.32.11"
+  }
 }
