@@ -100,6 +100,9 @@ importers:
       vitepress: 1.0.0-alpha.28_yht75qinkkz2dpdyacn6tejyne
       vue: 3.2.44
 
+  packages/table-tool:
+    specifiers: {}
+
   packages/theme-chalk:
     specifiers:
       '@esbuild-kit/cjs-loader': ^2.4.1
