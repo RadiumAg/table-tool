@@ -1,6 +1,22 @@
-import { PropType, ref } from 'vue';
+import { ComponentInternalInstance, PropType, ref } from 'vue';
 import { ValidateRule } from 'table-tool-utils';
-import { CellInstance, Rule } from './type';
+
+type Validate = () => Promise<void>;
+
+export type Cell = {
+  row: unknown;
+  focus: () => void;
+  validate: Validate;
+};
+
+export type CellInstance = Omit<ComponentInternalInstance, 'exposed'> & {
+  exposed: {
+    focus: () => void;
+    validate: Validate;
+  };
+};
+
+export type Rule = ValidateRule & { message: string };
 
 export const editCellProps = {
   row: {

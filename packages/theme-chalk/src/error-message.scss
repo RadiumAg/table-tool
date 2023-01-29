@@ -1,5 +1,7 @@
 /** @format */
-.message-box {
+@use "./mixins/mixins.scss" as *;
+
+@include b(message-box) {
   color: #fff;
   z-index: 9999;
   position: absolute;

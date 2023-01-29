@@ -12,16 +12,15 @@ import {
 import { ValidationError } from 'yup';
 import { RootSchema, getSchema } from 'table-tool-utils';
 import ErrorMessage from '../error-message';
-import { TABLE_TOOL_PROVIDE_KEY } from '../tool/tool';
-import { TableToolProvide } from '../tool/type';
+import { TABLE_TOOL_PROVIDE_KEY, TableToolProvide } from '../tool/tool';
 import {
+  CellInstance,
   ValidateError,
   activeCell,
   editCell,
   editCellEmits,
   editCellProps,
 } from './cell';
-import { CellInstance } from './type';
 
 export default defineComponent({
   props: editCellProps,
@@ -97,10 +96,12 @@ export default defineComponent({
 
     const validate = async () => {
       if (rootSchema.value.length > 0) {
-        schema.value = rootSchema.value.find(_ => _.field === props.field) || {
-          field: props.field,
-          schemas: [],
-        };
+        schema.value =
+          rootSchema.value.find(_ => _.field === props.field) ||
+          ({
+            field: props.field,
+            schemas: [],
+          } as RootSchema[number]);
       }
 
       if (schema.value.schemas.length === 0) return Promise.resolve();

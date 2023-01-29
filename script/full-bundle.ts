@@ -1,8 +1,9 @@
 import path from 'path';
-import vueJsx from '@vitejs/plugin-vue-jsx';
 import vue from '@vitejs/plugin-vue';
+import vueJsx from '@vitejs/plugin-vue-jsx';
 import postcss from 'rollup-plugin-postcss';
 import esbuild from 'rollup-plugin-esbuild';
+import ts from 'rollup-plugin-ts';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import { InputPluginOption, rollup } from 'rollup';
 import { getInfo } from './common';
@@ -10,8 +11,8 @@ import { getInfo } from './common';
 const info = getInfo('table-tool-vue');
 const utilsInfo = getInfo('table-tool-utils');
 
-export const getPlugins = (minify: boolean) => {
-  if (!info) return;
+const getPlugins = (minify: boolean) => {
+  if (!info) return [];
 
   return [
     vue({ isProduction: false }),
@@ -66,7 +67,10 @@ const buildBundle = async () => {
   if (!info || !utilsInfo) return;
 
   const build = await rollup({
-    plugins: getPlugins(false),
+    plugins: [
+      ts({ tsconfig: path.resolve(__dirname, '../tsconfig.json') }),
+      ...getPlugins(false),
+    ],
     input: [info.inputfile, utilsInfo.inputfile],
     external: ['vue', 'yup'],
   });
