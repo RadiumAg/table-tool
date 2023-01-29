@@ -1,7 +1,7 @@
 import path from 'path';
 import gulpSass from 'gulp-sass';
 import dartSass from 'sass';
-import { dest, src } from 'gulp';
+import { dest, parallel, src } from 'gulp';
 import chalk from 'chalk';
 import consola from 'consola';
 
@@ -9,6 +9,11 @@ import cleanCSS from 'gulp-clean-css';
 import autoprefixer from 'gulp-autoprefixer';
 
 const distFolder = path.resolve(__dirname, 'dist');
+const distBundle = path.resolve(
+  __dirname,
+  '../../',
+  'dist/table-tool/theme-chalk',
+);
 
 function buildThemeChalk() {
   const sass = gulpSass(dartSass);
@@ -28,6 +33,10 @@ function buildThemeChalk() {
     .pipe(dest(distFolder));
 }
 
-buildThemeChalk();
+function copyThemeChalkBundle() {
+  return src(`${distFolder}/**`).pipe(dest(distBundle));
+}
 
-export default buildThemeChalk;
+const build = parallel(copyThemeChalkBundle, buildThemeChalk);
+
+export default build;

@@ -1,4 +1,5 @@
 import path from 'path';
+import { copyFile, mkdir } from 'fs/promises';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import postcss from 'rollup-plugin-postcss';
@@ -6,7 +7,10 @@ import esbuild from 'rollup-plugin-esbuild';
 import ts from 'rollup-plugin-ts';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import { InputPluginOption, rollup } from 'rollup';
+import { parallel, series } from 'gulp';
+import build from '../packages/theme-chalk/gulpfile';
 import { getInfo } from './common';
+import { run } from './process';
 
 const info = getInfo('table-tool-vue');
 const utilsInfo = getInfo('table-tool-utils');
@@ -93,10 +97,25 @@ const buildBundle = async () => {
   ]);
 };
 
+const copyFullStyle = async () => {
+  await copyFile(
+    path.resolve(__dirname, '../dist/table-tool', 'theme-chalk/index.css'),
+    path.resolve(__dirname, '../dist/table-tool', 'dist/index.css'),
+  );
+};
+
+const copyPackageFile = async () => {
+  await copyFile(
+    path.resolve(__dirname, '../packages', 'table-tool', 'package.json'),
+    path.resolve(__dirname, '../dist/table-tool', 'package.json'),
+  );
+};
+
 export const runBundle = async () => {
-  await Promise.all([
-    buildFullBundle(true),
-    buildFullBundle(false),
-    buildBundle(),
-  ]);
+  await buildBundle();
+  await buildFullBundle(true);
+  await buildFullBundle(false);
+  await run('pnpm run -C ./packages/theme-chalk build:theme-chalk');
+  await copyFullStyle();
+  await copyPackageFile();
 };

@@ -7,12 +7,16 @@ importers:
       '@raag/eslint-config-react': ^1.1.4
       '@raag/eslint-config-vue': ^1.1.4
       '@rollup/plugin-node-resolve': ^15.0.1
+      '@types/gulp': ^4.0.10
       '@types/node': ^18.11.9
       '@vitejs/plugin-vue': ^3.2.0
       '@vitejs/plugin-vue-jsx': ^2.1.1
+      chalk: ^5.2.0
+      consola: ^2.15.3
       eslint: ^8.27.0
       esno: ^0.16.3
       fs-extra: ^10.1.0
+      gulp: ^4.0.2
       local-pkg: ^0.4.2
       postcss: ^8.4.19
       rimraf: ^3.0.2
@@ -37,12 +41,16 @@ importers:
       '@raag/eslint-config-react': 1.1.4_rmayb2veg2btbq6mbmnyivgasy
       '@raag/eslint-config-vue': 1.1.4_rmayb2veg2btbq6mbmnyivgasy
       '@rollup/plugin-node-resolve': 15.0.1_rollup@3.4.0
+      '@types/gulp': 4.0.10
       '@types/node': 18.11.9
       '@vitejs/plugin-vue': 3.2.0_vue@3.2.44
       '@vitejs/plugin-vue-jsx': 2.1.1_vue@3.2.44
+      chalk: 5.2.0
+      consola: 2.15.3
       eslint: 8.27.0
       esno: 0.16.3
       fs-extra: 10.1.0
+      gulp: 4.0.2
       local-pkg: 0.4.2
       postcss: 8.4.19
       rimraf: 3.0.2
