@@ -4,14 +4,22 @@
       "DOM",
       "ESNext"
     ],
+    "jsx": "preserve",
     "strict": true,
+    "declaration": true,
     "target": "ESNext",
     "module": "ESNext",
+    "allowJs": true,
+    "sourceMap": false,
     "skipLibCheck": true,
     "noImplicitAny": false,
     "esModuleInterop": true,
+    "moduleDetection":"force",
     "moduleResolution": "Node",
+    "emitDeclarationOnly": true,
     "forceConsistentCasingInFileNames": true
   },
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

@@ -1,17 +1,3 @@
-import { runBundle as vueRunBundle } from './vue';
-import { runBundle as utilsRunBundle } from './utils';
-import { getArgv } from './common';
+import { runBundle } from './full-bundle';
 
-(async () => {
-  const argObj = getArgv();
-
-  if (argObj && argObj.type) {
-    const type = argObj.type;
-
-    if (type === 'vue') {
-      vueRunBundle();
-    } else if (type === 'utils') {
-      utilsRunBundle();
-    }
-  }
-})();
+runBundle();

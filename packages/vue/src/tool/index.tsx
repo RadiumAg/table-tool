@@ -5,10 +5,8 @@ import {
   getSchema,
   isObject,
 } from 'table-tool-utils';
-import { ValidateError, editCell, otherAreaClick } from '../cell/cell';
-import { Cell } from '../cell/type';
-import { TABLE_TOOL_PROVIDE_KEY, ToolProps } from './tool';
-import { TableToolProvide } from './type';
+import { Cell, ValidateError, editCell, otherAreaClick } from '../cell/cell';
+import { TABLE_TOOL_PROVIDE_KEY, TableToolProvide, ToolProps } from './tool';
 
 export default defineComponent({
   props: ToolProps,
