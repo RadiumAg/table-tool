@@ -4,9 +4,12 @@
       "DOM",
       "ESNext"
     ],
+    "jsx": "preserve",
     "strict": true,
+    "declaration": true,
     "target": "ESNext",
     "module": "ESNext",
+    "allowJs": true,
     "skipLibCheck": true,
     "noImplicitAny": false,
     "esModuleInterop": true,

@@ -2,26 +2,16 @@
   "name": "table-tool-vue",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "module": "dist/table-tool-vue.esm.js",
-  "types": "dist/table-tool-vue.d.ts",
-  "files": [
-    "index.js",
-    "dist"
-  ],
+  "main": "index.ts",
   "scripts": {
-    "build:vue":"pnpm run build:types && esno ../../script/build --type=vue",
-    "build:types":"vue-tsc"
+    "build:vue": "esno ../../script/build --type=vue"
   },
-  "keywords": ["table-tool"],
+  "keywords": [
+    "table-tool"
+  ],
   "author": "Radium",
   "license": "ISC",
   "peerDependencies": {
     "vue": "^3.0.0"
-  },
-  "dependencies": {
-    "table-tool-utils": "workspace:*",
-    "vue": "^3.2.44",
-    "yup": "^0.32.11"
   }
 }
