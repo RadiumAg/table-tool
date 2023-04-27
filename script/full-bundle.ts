@@ -1,5 +1,5 @@
 import path from 'path';
-import { copyFile, mkdir } from 'fs/promises';
+import { copyFile } from 'fs/promises';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import postcss from 'rollup-plugin-postcss';
@@ -7,8 +7,6 @@ import esbuild from 'rollup-plugin-esbuild';
 import ts from 'rollup-plugin-ts';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import { InputPluginOption, rollup } from 'rollup';
-import { parallel, series } from 'gulp';
-import build from '../packages/theme-chalk/gulpfile';
 import { getInfo } from './common';
 import { run } from './process';
 
