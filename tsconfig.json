@@ -14,7 +14,6 @@
     "skipLibCheck": true,
     "noImplicitAny": false,
     "esModuleInterop": true,
-    "moduleDetection":"force",
     "moduleResolution": "Node",
     "emitDeclarationOnly": true,
     "forceConsistentCasingInFileNames": true
