@@ -71,13 +71,7 @@ const buildBundle = async () => {
   const build = await rollup({
     plugins: [
       ts({
-        tsconfig: {
-          jsx: 'preserve',
-          declaration: true,
-          sourceMap: false,
-          baseUrl: path.resolve(__dirname, '../packages/vue'),
-        },
-        cwd: path.resolve(__dirname, '../packages/vue'),
+        tsconfig: path.resolve(__dirname, '../tsconfig.json'),
       }),
       ...getPlugins(false),
     ],

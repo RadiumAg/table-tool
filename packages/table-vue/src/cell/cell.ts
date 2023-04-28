@@ -3,22 +3,22 @@ import { ValidateRule } from 'table-tool-utils';
 
 type Validate = () => Promise<void>;
 
-export type Cell = {
+type Cell = {
   row: unknown;
   focus: () => void;
   validate: Validate;
 };
 
-export type CellInstance = Omit<ComponentInternalInstance, 'exposed'> & {
+type CellInstance = Omit<ComponentInternalInstance, 'exposed'> & {
   exposed: {
     focus: () => void;
     validate: Validate;
   };
 };
 
-export type Rule = ValidateRule & { message: string };
+type Rule = ValidateRule & { message: string };
 
-export const editCellProps = {
+const editCellProps = {
   row: {
     type: Object,
     required: true,
@@ -38,18 +38,18 @@ export const editCellProps = {
   },
 };
 
-export const editCellEmits = ['update:modelValue'];
+const editCellEmits = ['update:modelValue'];
 
-export const editCell = ref<CellInstance | null>();
+const editCell = ref<CellInstance | null>();
 
-export const activeCell = ref<HTMLDivElement | null>();
+const activeCell = ref<HTMLDivElement | null>();
 
-export const otherAreaClick = () => {
+const otherAreaClick = () => {
   if (!activeCell.value) return;
   activeCell.value = null;
 };
 
-export class ValidateError {
+class ValidateError {
   /**
    * 行数据
    *
@@ -94,3 +94,13 @@ export class ValidateError {
     this.rowIndex = rowIndex;
   }
 }
+
+export type { Cell, Rule, CellInstance };
+export {
+  editCellProps,
+  editCellEmits,
+  editCell,
+  activeCell,
+  ValidateError,
+  otherAreaClick,
+};
