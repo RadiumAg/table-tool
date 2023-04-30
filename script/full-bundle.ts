@@ -2,9 +2,8 @@ import path from 'path';
 import { copyFile } from 'fs/promises';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
-import postcss from 'rollup-plugin-postcss';
 import esbuild from 'rollup-plugin-esbuild';
-import ts from 'rollup-plugin-ts';
+import ts from 'rollup-plugin-typescript2';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import { InputPluginOption, rollup } from 'rollup';
 import { getInfo } from './common';
@@ -17,8 +16,12 @@ const getPlugins = (minify: boolean) => {
   if (!info) return [];
 
   return [
-    vue({ isProduction: false }),
-    vueJsx(),
+    ts({
+      tsconfig: path.resolve(__dirname, '../tsconfig.json'),
+    }),
+    nodeResolve({
+      extensions: ['.mjs', '.js', '.json', '.ts'],
+    }),
     esbuild({
       sourceMap: minify,
       target: 'esnext',
@@ -27,14 +30,9 @@ const getPlugins = (minify: boolean) => {
       },
       minify,
     }),
-    nodeResolve({
-      extensions: ['.mjs', '.js', '.json', '.ts'],
-    }),
-    postcss({
-      minimize: minify,
-      modules: true,
-      sourceMap: true,
-    }),
+
+    vue({ isProduction: false }),
+    vueJsx(),
   ] as InputPluginOption[];
 };
 
@@ -69,13 +67,8 @@ const buildBundle = async () => {
   if (!info || !utilsInfo) return;
 
   const build = await rollup({
-    plugins: [
-      // ts({
-      //   tsconfig: path.resolve(__dirname, '../tsconfig.json'),
-      // }),
-      ...getPlugins(false),
-    ],
-    input: [info.inputfile, utilsInfo.inputfile],
+    plugins: [...getPlugins(false)],
+    input: [info.inputfile],
     external: ['vue', 'yup'],
   });
 
