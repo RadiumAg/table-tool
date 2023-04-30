@@ -15,10 +15,7 @@ const utilsInfo = getInfo('table-tool-utils');
 const getPlugins = (minify: boolean) => {
   if (!info) return [];
 
-  return [
-    ts({
-      tsconfig: path.resolve(__dirname, '../tsconfig.json'),
-    }),
+  const plugins = [
     nodeResolve({
       extensions: ['.mjs', '.js', '.json', '.ts'],
     }),
@@ -34,6 +31,8 @@ const getPlugins = (minify: boolean) => {
     vue({ isProduction: false }),
     vueJsx(),
   ] as InputPluginOption[];
+
+  return plugins;
 };
 
 const buildFullBundle = async (minify: boolean) => {
@@ -67,7 +66,12 @@ const buildBundle = async () => {
   if (!info || !utilsInfo) return;
 
   const build = await rollup({
-    plugins: [...getPlugins(false)],
+    plugins: [
+      ts({
+        tsconfig: path.resolve(__dirname, '../tsconfig.json'),
+      }),
+      ...getPlugins(false),
+    ],
     input: [info.inputfile],
     external: ['vue', 'yup'],
   });
