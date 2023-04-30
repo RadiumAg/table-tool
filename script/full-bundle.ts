@@ -70,9 +70,9 @@ const buildBundle = async () => {
 
   const build = await rollup({
     plugins: [
-      ts({
-        tsconfig: path.resolve(__dirname, '../tsconfig.json'),
-      }),
+      // ts({
+      //   tsconfig: path.resolve(__dirname, '../tsconfig.json'),
+      // }),
       ...getPlugins(false),
     ],
     input: [info.inputfile, utilsInfo.inputfile],

@@ -14,6 +14,7 @@
     "skipLibCheck": true,
     "noImplicitAny": false,
     "esModuleInterop": true,
+    "moduleResolution": "nodenext",
     "emitDeclarationOnly": true,
     "forceConsistentCasingInFileNames": true
   },
