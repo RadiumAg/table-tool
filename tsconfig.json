@@ -10,15 +10,13 @@
     "target": "ESNext",
     "module": "ESNext",
     "allowJs": true,
-    "sourceMap": false,
+    "sourceMap": true,
     "skipLibCheck": true,
     "noImplicitAny": false,
     "esModuleInterop": true,
-    "moduleResolution": "Node",
+    "moduleResolution": "nodenext",
     "emitDeclarationOnly": true,
     "forceConsistentCasingInFileNames": true
   },
-  "exclude": [
-    "node_modules"
-  ]
+ 
 }
