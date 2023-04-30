@@ -1,5 +1,4 @@
 import * as yup from 'yup';
-
 type Trigger = 'blur' | 'change';
 
 export type RootSchema = {
@@ -82,7 +81,6 @@ export const getSchema = (field: string, rules: ValidateRule[]) => {
           validateRule = validateRule[key](rule.message);
         } else validateRule = validateRule[key](rule[key], rule.message);
       });
-
     ruleMap.schemas.push({ value: validateRule, rule });
   }
 
