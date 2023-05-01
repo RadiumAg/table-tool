@@ -22,6 +22,11 @@
     "packages/**/*"
   ],
   "exclude": [
-    "packages/theme-chalk/**/*",
+    "packages/theme-chalk/**/*"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
   ]
 }

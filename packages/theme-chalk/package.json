@@ -10,7 +10,7 @@
     "table-tool"
   ],
   "author": "Radium",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@esbuild-kit/cjs-loader": "^2.4.1",
     "@types/gulp": "^4.0.10",
