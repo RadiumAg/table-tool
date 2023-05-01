@@ -8,7 +8,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@raag/eslint-config-react": "^1.1.4",
     "@raag/eslint-config-vue": "^1.1.4",
