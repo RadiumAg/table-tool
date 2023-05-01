@@ -69,11 +69,11 @@ export default defineConfigWithTheme<ThemeConfig>({
         '@theme': path.resolve(__dirname, './theme'),
         'table-tool-vue': path.resolve(
           __dirname,
-          '../../packages/vue/src/index.ts',
+          '../../packages/table-vue/src/index.ts',
         ),
         'table-tool-utils': path.resolve(
           __dirname,
-          '../../packages/utils/src/index.ts',
+          '../../packages/table-tool-utils/src/index.ts',
         ),
       },
     },
