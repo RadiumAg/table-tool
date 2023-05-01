@@ -7,7 +7,7 @@ on:
       - "reopened"
       - "auto_merge_enabled"
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
