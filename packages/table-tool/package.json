@@ -1,6 +1,6 @@
 {
   "name": "table-tool",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "表格增强工具",
   "main": "lib/table-vue/index.js",
   "module": "esm/table-vue/index.js",
