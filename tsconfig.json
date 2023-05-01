@@ -18,7 +18,15 @@
     "emitDeclarationOnly": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["packages/**/*"],
-  "exclude": ["packages/theme-chalk/**/*"]
- 
+  "include": [
+    "packages/**/*"
+  ],
+  "exclude": [
+    "packages/theme-chalk/**/*"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }

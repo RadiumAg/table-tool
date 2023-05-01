@@ -8,7 +8,7 @@
   },
   "keywords": ["table-tool"],
   "author": "Radium",
-  "license": "ISC",
+  "license": "MIT",
   "peerDependencies": {
     "yup": "^0.32.11"
   }

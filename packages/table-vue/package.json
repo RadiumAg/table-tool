@@ -10,7 +10,7 @@
     "table-tool"
   ],
   "author": "Radium",
-  "license": "ISC",
+  "license": "MIT",
   "peerDependencies": {
     "vue": "^3.0.0"
   }
